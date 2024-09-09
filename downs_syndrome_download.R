@@ -1,3 +1,5 @@
+# This script goes downloads the link, pivots the table, then writes the tsv file using the code from the excel sheet
+
 library(tidyverse)
 
 link = "https://www.ncbi.nlm.nih.gov/geo/download/?type=rnaseq_counts&acc=GSE101942&format=file&file=GSE101942_norm_counts_TPM_GRCh38.p13_NCBI.tsv.gz"
