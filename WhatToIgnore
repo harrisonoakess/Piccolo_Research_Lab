@@ -1,4 +1,4 @@
-tile - Y
+title - Y
 geo_accession - 
 status - N
 submission_date - N
@@ -12,7 +12,7 @@ charateristics_ch1.1 - Y
 molecule_ch1 - Y
 extract_protocol_ch1 - N
 extract_protocol_ch1.1 - N
-taxid_ch1 - N
+taxid_ch1 - 
 description - 
 description.1 - N
 data_processing - N
@@ -39,3 +39,6 @@ relation.1 - N
 supplementary_file_1 - N
 genotype/variation:ch1 - Y
 tissue:ch1 - Y
+
+Key Words:
+Contact, library, processing, description?, relation, platform, instument, protocol, file, date, row, status, 
