@@ -2,7 +2,7 @@
 
 library(tidyverse)
 
-series_ID_new = "GSE101942"
+new_series_ID = "GSE101942"
 
 get_data <- function(series_ID) {
   link = paste("https://www.ncbi.nlm.nih.gov/geo/download/?type=rnaseq_counts&acc=", series_ID, "&format=file&file=", series_ID, "_norm_counts_TPM_GRCh38.p13_NCBI.tsv.gz", sep = "")
@@ -17,7 +17,8 @@ get_data <- function(series_ID) {
   
   # view(transposed_data)
   
-  write_tsv(transposed_data, paste(series_ID, "_transposed.tsv", sep=""))
+  file_location <- "Data/TransposedData/"
+  write_tsv(transposed_data, paste0(file_location, series_ID, "_transposed.tsv"))
 }
 
 get_data(new_series_ID)

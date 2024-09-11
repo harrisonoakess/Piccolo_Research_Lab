@@ -7,9 +7,10 @@ get_metadata <- function(series_ID) {
   metadata <- getGEO(series_ID)[[1]]
   
   metadata = as_tibble(pData(metadata))
-  # class(metadata)
   # view(metadata)
-  write_tsv(metadata, paste(series_id, "_metadata.tsv", sep=""))
+  
+  file_location <- "Data/Metadata/"
+  write_tsv(metadata, paste0(file_location, series_id, "_metadata.tsv"))
 }
 
 get_metadata(new_series_ID)
