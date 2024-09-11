@@ -15,7 +15,7 @@ get_data <- function(series_ID) {
   pivot_longer(data, 2:ncol(data), names_to = "sample_id", values_to = "values") %>%
     pivot_wider(names_from = "GeneID", values_from = "values") -> transposed_data
   
-  # view(transposed_data)
+  view(transposed_data)
   
   file_location <- "Data/TransposedData/"
   write_tsv(transposed_data, paste0(file_location, series_ID, "_transposed.tsv"))
