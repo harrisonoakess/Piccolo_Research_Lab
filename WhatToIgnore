@@ -1,19 +1,19 @@
 title - Y
-geo_accession - 
+geo_accession - Y
 status - N
 submission_date - N
 last_update_date - N 
-type - 
-channel_count - 
+type - N
+channel_count - N
 source_name_ch1 - Y
 organism_ch1 - Y
-characteristics_ch1 - Y
-charateristics_ch1.1 - Y
+characteristics_ch1 - N
+charateristics_ch1.1 - N
 molecule_ch1 - Y
 extract_protocol_ch1 - N
 extract_protocol_ch1.1 - N
-taxid_ch1 - 
-description - 
+taxid_ch1 - N
+description - N
 description.1 - N
 data_processing - N
 data_processing.1 - N
@@ -30,7 +30,7 @@ contact_state - N
 contact_zip/postal_code - N
 contact_country - N
 data_row_count - N
-instument_model - N
+instrument_model - N
 library_selection - N
 library_source - N
 library_strategy - N
@@ -40,5 +40,16 @@ supplementary_file_1 - N
 genotype/variation:ch1 - Y
 tissue:ch1 - Y
 
+look for common terms /:
+_ch
+
 Key Words:
-Contact, library, processing, description?, relation, platform, instument, protocol, file, date, row, status, 
+Contact, library, processing, description?, relation, platform, instrument, protocol, file, date, row, status,
+
+
+getting the metadata
+1. download the original file
+2. save is to a temperary file
+3. remove the unwanted columns
+4. Save the new file
+5. Delete the temporary file
