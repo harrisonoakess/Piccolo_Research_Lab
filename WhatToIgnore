@@ -53,3 +53,6 @@ getting the metadata
 3. remove the unwanted columns
 4. Save the new file
 5. Delete the temporary file
+
+order for metadata download:
+write an if statment to check and make sure there is a temp file, if there is not, run the download function, then is can continue down the script
