@@ -4,6 +4,10 @@ library(tidyverse)
 
 new_series_ID = "GSE101942"
 
+RNA_series_ID = c("GSE101942", "GSE114559", "GSE121065", "GSE124252", "GSE124513", "GSE126910", "GSE128614", "GSE128621", "GSE131249", "GSE144857", "GSE151282", 
+                  "GSE154418", "GSE160637", "GSE160690", "GSE166849", "GSE167021", "GSE183701", "GSE188568", "GSE190053", "GSE190305", "GSE201093", "GSE203257", 
+                  "GSE208575", "GSE222365", "GSE42142", "GSE52249", "GSE55504", "GSE79842", "GSE84531", "GSE95552")
+
 get_data <- function(series_ID) {
   link = paste("https://www.ncbi.nlm.nih.gov/geo/download/?type=rnaseq_counts&acc=", series_ID, "&format=file&file=", series_ID, "_norm_counts_TPM_GRCh38.p13_NCBI.tsv.gz", sep = "")
   
@@ -21,4 +25,9 @@ get_data <- function(series_ID) {
   write_tsv(transposed_data, paste0(file_location, series_ID, "_transposed.tsv"))
 }
 
-get_data(new_series_ID)
+# get_data(new_series_ID)
+
+
+for (i in RNA_series_ID) {
+  get_data(i)
+}
