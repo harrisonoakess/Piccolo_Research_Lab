@@ -56,3 +56,5 @@ getting the metadata
 
 order for metadata download:
 write an if statment to check and make sure there is a temp file, if there is not, run the download function, then is can continue down the script
+
+***three columns to start: ploidy:ch2, cell type:ch1, molecule_ch1***
