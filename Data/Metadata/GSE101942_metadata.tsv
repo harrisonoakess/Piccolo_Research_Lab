@@ -1,102 +1,13 @@
-title	geo_accession	type	source_name_ch1	organism_ch1	molecule_ch1	genotype/variation:ch1	tissue:ch1
-Normal [15274]	GSM3144752	SRA	Normal embryo	Homo sapiens	total RNA	Normal	blastocyst
-Normal [15275]	GSM3144753	SRA	Normal embryo	Homo sapiens	total RNA	Normal	blastocyst
-Normal [15282]	GSM3144754	SRA	Normal embryo	Homo sapiens	total RNA	Normal	blastocyst
-Normal [Yael_17132]	GSM3144755	SRA	Normal embryo	Homo sapiens	total RNA	Normal	blastocyst
-Normal [Yael_17133]	GSM3144756	SRA	Normal embryo	Homo sapiens	total RNA	Normal	blastocyst
-Trisomy_1 [16755]	GSM3144757	SRA	Trisomy 1 embryo	Homo sapiens	total RNA	Trisomy 1	blastocyst
-Trisomy_1 [16793]	GSM3144758	SRA	Trisomy 1 embryo	Homo sapiens	total RNA	Trisomy 1	blastocyst
-Trisomy_10 [16465]	GSM3144759	SRA	Trisomy 10 embryo	Homo sapiens	total RNA	Trisomy 10	blastocyst
-Trisomy_10 [16603]	GSM3144760	SRA	Trisomy 10 embryo	Homo sapiens	total RNA	Trisomy 10	blastocyst
-Trisomy_11 [16419]	GSM3144761	SRA	Trisomy 11 embryo	Homo sapiens	total RNA	Trisomy 11	blastocyst
-Trisomy_11 [16607]	GSM3144762	SRA	Trisomy 11 embryo	Homo sapiens	total RNA	Trisomy 11	blastocyst
-Trisomy_12 [16431]	GSM3144763	SRA	Trisomy 12 embryo	Homo sapiens	total RNA	Trisomy 12	blastocyst
-Trisomy_13 [16425]	GSM3144764	SRA	Trisomy 13 embryo	Homo sapiens	total RNA	Trisomy 13	blastocyst
-Trisomy_13 [16433]	GSM3144765	SRA	Trisomy 13 embryo	Homo sapiens	total RNA	Trisomy 13	blastocyst
-Trisomy_14 [16479]	GSM3144766	SRA	Trisomy 14 embryo	Homo sapiens	total RNA	Trisomy 14	blastocyst
-Trisomy_14 [16604]	GSM3144767	SRA	Trisomy 14 embryo	Homo sapiens	total RNA	Trisomy 14	blastocyst
-Trisomy_15 [15090]	GSM3144768	SRA	Trisomy 15 embryo	Homo sapiens	total RNA	Trisomy 15	blastocyst
-Trisomy_15 [15091]	GSM3144769	SRA	Trisomy 15 embryo	Homo sapiens	total RNA	Trisomy 15	blastocyst
-Trisomy_15 [15092]	GSM3144770	SRA	Trisomy 15 embryo	Homo sapiens	total RNA	Trisomy 15	blastocyst
-Trisomy_15 [15093]	GSM3144771	SRA	Trisomy 15 embryo	Homo sapiens	total RNA	Trisomy 15	blastocyst
-Trisomy_15 [15094]	GSM3144772	SRA	Trisomy 15 embryo	Homo sapiens	total RNA	Trisomy 15	blastocyst
-Trisomy_16 [16467]	GSM3144773	SRA	Trisomy 16 embryo	Homo sapiens	total RNA	Trisomy 16	blastocyst
-Trisomy_16 [16482]	GSM3144774	SRA	Trisomy 16 embryo	Homo sapiens	total RNA	Trisomy 16	blastocyst
-Trisomy_17 [16480]	GSM3144775	SRA	Trisomy 17 embryo	Homo sapiens	total RNA	Trisomy 17	blastocyst
-Trisomy_17 [16731]	GSM3144776	SRA	Trisomy 17 embryo	Homo sapiens	total RNA	Trisomy 17	blastocyst
-Trisomy_18 [16002]	GSM3144777	SRA	Trisomy 18 embryo	Homo sapiens	total RNA	Trisomy 18	blastocyst
-Trisomy_18 [16003]	GSM3144778	SRA	Trisomy 18 embryo	Homo sapiens	total RNA	Trisomy 18	blastocyst
-Trisomy_18 [16004]	GSM3144779	SRA	Trisomy 18 embryo	Homo sapiens	total RNA	Trisomy 18	blastocyst
-Trisomy_19 [16478]	GSM3144780	SRA	Trisomy 19 embryo	Homo sapiens	total RNA	Trisomy 19	blastocyst
-Trisomy_19 [16791]	GSM3144781	SRA	Trisomy 19 embryo	Homo sapiens	total RNA	Trisomy 19	blastocyst
-Trisomy_2 [16740]	GSM3144782	SRA	Trisomy 2 embryo	Homo sapiens	total RNA	Trisomy 2	blastocyst
-Trisomy_2 [16798]	GSM3144783	SRA	Trisomy 2 embryo	Homo sapiens	total RNA	Trisomy 2	blastocyst
-Trisomy_20 [16481]	GSM3144784	SRA	Trisomy 20 embryo	Homo sapiens	total RNA	Trisomy 20	blastocyst
-Trisomy_20 [16605]	GSM3144785	SRA	Trisomy 20 embryo	Homo sapiens	total RNA	Trisomy 20	blastocyst
-Trisomy_21 [15283]	GSM3144786	SRA	Trisomy 21 embryo	Homo sapiens	total RNA	Trisomy 21	blastocyst
-Trisomy_21 [15284]	GSM3144787	SRA	Trisomy 21 embryo	Homo sapiens	total RNA	Trisomy 21	blastocyst
-Trisomy_21 [16001]	GSM3144788	SRA	Trisomy 21 embryo	Homo sapiens	total RNA	Trisomy 21	blastocyst
-Trisomy_22 [15096]	GSM3144789	SRA	Trisomy 22 embryo	Homo sapiens	total RNA	Trisomy 22	blastocyst
-Trisomy_22 [15098]	GSM3144790	SRA	Trisomy 22 embryo	Homo sapiens	total RNA	Trisomy 22	blastocyst
-Trisomy_3 [16418]	GSM3144791	SRA	Trisomy 3 embryo	Homo sapiens	total RNA	Trisomy 3	blastocyst
-Trisomy_3 [16434]	GSM3144792	SRA	Trisomy 3 embryo	Homo sapiens	total RNA	Trisomy 3	blastocyst
-Trisomy_3 [16783]	GSM3144793	SRA	Trisomy 3 embryo	Homo sapiens	total RNA	Trisomy 3	blastocyst
-Trisomy_4 [16606]	GSM3144794	SRA	Trisomy 4 embryo	Homo sapiens	total RNA	Trisomy 4	blastocyst
-Trisomy_4 [16746]	GSM3144795	SRA	Trisomy 4 embryo	Homo sapiens	total RNA	Trisomy 4	blastocyst
-Trisomy_5 [16463]	GSM3144796	SRA	Trisomy 5 embryo	Homo sapiens	total RNA	Trisomy 5	blastocyst
-Trisomy_5 [16770]	GSM3144797	SRA	Trisomy 5 embryo	Homo sapiens	total RNA	Trisomy 5	blastocyst
-Trisomy_6 [16727]	GSM3144798	SRA	Trisomy 6 embryo	Homo sapiens	total RNA	Trisomy 6	blastocyst
-Trisomy_6 [16747]	GSM3144799	SRA	Trisomy 6 embryo	Homo sapiens	total RNA	Trisomy 6	blastocyst
-Trisomy_7 [16477]	GSM3144800	SRA	Trisomy 7 embryo	Homo sapiens	total RNA	Trisomy 7	blastocyst
-Trisomy_7 [16732]	GSM3144801	SRA	Trisomy 7 embryo	Homo sapiens	total RNA	Trisomy 7	blastocyst
-Trisomy_8 [16420]	GSM3144802	SRA	Trisomy 8 embryo	Homo sapiens	total RNA	Trisomy 8	blastocyst
-Trisomy_8 [16432]	GSM3144803	SRA	Trisomy 8 embryo	Homo sapiens	total RNA	Trisomy 8	blastocyst
-Trisomy_9 [16466]	GSM3144804	SRA	Trisomy 9 embryo	Homo sapiens	total RNA	Trisomy 9	blastocyst
-Trisomy_9 [16774]	GSM3144805	SRA	Trisomy 9 embryo	Homo sapiens	total RNA	Trisomy 9	blastocyst
-Trisomy_XXX [16147]	GSM3144806	SRA	Trisomy XXX embryo	Homo sapiens	total RNA	Trisomy XXX	blastocyst
-Trisomy_XXX [16187]	GSM3144807	SRA	Trisomy XXX embryo	Homo sapiens	total RNA	Trisomy XXX	blastocyst
-Trisomy_XXY [16185_asterick]	GSM3144808	SRA	Trisomy XXY embryo	Homo sapiens	total RNA	Trisomy XXY	blastocyst
-Trisomy_XXY [16186]	GSM3144809	SRA	Trisomy XXY embryo	Homo sapiens	total RNA	Trisomy XXY	blastocyst
-Monosomy_1 [16756]	GSM3144810	SRA	Monosomy 1 embryo	Homo sapiens	total RNA	Monosomy 1	blastocyst
-Monosomy_1 [16782]	GSM3144811	SRA	Monosomy 1 embryo	Homo sapiens	total RNA	Monosomy 1	blastocyst
-Monosomy_10 [16757]	GSM3144812	SRA	Monosomy 10 embryo	Homo sapiens	total RNA	Monosomy 10	blastocyst
-Monosomy_10 [16797]	GSM3144813	SRA	Monosomy 10 embryo	Homo sapiens	total RNA	Monosomy 10	blastocyst
-Monosomy_11 [16720]	GSM3144814	SRA	Monosomy 11 embryo	Homo sapiens	total RNA	Monosomy 11	blastocyst
-Monosomy_11 [16748]	GSM3144815	SRA	Monosomy 11 embryo	Homo sapiens	total RNA	Monosomy 11	blastocyst
-Monosomy_12 [16725]	GSM3144816	SRA	Monosomy 12 embryo	Homo sapiens	total RNA	Monosomy 12	blastocyst
-Monosomy_13 [16780]	GSM3144817	SRA	Monosomy 13 embryo	Homo sapiens	total RNA	Monosomy 13	blastocyst
-Monosomy_13 [16795]	GSM3144818	SRA	Monosomy 13 embryo	Homo sapiens	total RNA	Monosomy 13	blastocyst
-Monosomy_14 [16772]	GSM3144819	SRA	Monosomy 14 embryo	Homo sapiens	total RNA	Monosomy 14	blastocyst
-Monosomy_14 [16796]	GSM3144820	SRA	Monosomy 14 embryo	Homo sapiens	total RNA	Monosomy 14	blastocyst
-Monosomy_15 [16614]	GSM3144821	SRA	Monosomy 15 embryo	Homo sapiens	total RNA	Monosomy 15	blastocyst
-Monosomy_15 [16728]	GSM3144822	SRA	Monosomy 15 embryo	Homo sapiens	total RNA	Monosomy 15	blastocyst
-Monosomy_16 [16721]	GSM3144823	SRA	Monosomy 16 embryo	Homo sapiens	total RNA	Monosomy 16	blastocyst
-Monosomy_16 [16723]	GSM3144824	SRA	Monosomy 16 embryo	Homo sapiens	total RNA	Monosomy 16	blastocyst
-Monosomy_17 [16745]	GSM3144825	SRA	Monosomy 17 embryo	Homo sapiens	total RNA	Monosomy 17	blastocyst
-Monosomy_17 [16751]	GSM3144826	SRA	Monosomy 17 embryo	Homo sapiens	total RNA	Monosomy 17	blastocyst
-Monosomy_18 [16752]	GSM3144827	SRA	Monosomy 18 embryo	Homo sapiens	total RNA	Monosomy 18	blastocyst
-Monosomy_18 [16773]	GSM3144828	SRA	Monosomy 18 embryo	Homo sapiens	total RNA	Monosomy 18	blastocyst
-Monosomy_19 [16729]	GSM3144829	SRA	Monosomy 19 embryo	Homo sapiens	total RNA	Monosomy 19	blastocyst
-Monosomy_19 [16769]	GSM3144830	SRA	Monosomy 19 embryo	Homo sapiens	total RNA	Monosomy 19	blastocyst
-Monosomy_2 [16722]	GSM3144831	SRA	Monosomy 2 embryo	Homo sapiens	total RNA	Monosomy 2	blastocyst
-Monosomy_2 [16753]	GSM3144832	SRA	Monosomy 2 embryo	Homo sapiens	total RNA	Monosomy 2	blastocyst
-Monosomy_20 [16739]	GSM3144833	SRA	Monosomy 20 embryo	Homo sapiens	total RNA	Monosomy 20	blastocyst
-Monosomy_20 [16749]	GSM3144834	SRA	Monosomy 20 embryo	Homo sapiens	total RNA	Monosomy 20	blastocyst
-Monosomy_21 [16615]	GSM3144835	SRA	Monosomy 21 embryo	Homo sapiens	total RNA	Monosomy 21	blastocyst
-Monosomy_21 [16743]	GSM3144836	SRA	Monosomy 21 embryo	Homo sapiens	total RNA	Monosomy 21	blastocyst
-Monosomy_22 [16611]	GSM3144837	SRA	Monosomy 22 embryo	Homo sapiens	total RNA	Monosomy 22	blastocyst
-Monosomy_22 [16616]	GSM3144838	SRA	Monosomy 22 embryo	Homo sapiens	total RNA	Monosomy 22	blastocyst
-Monosomy_3 [16744]	GSM3144839	SRA	Monosomy 3 embryo	Homo sapiens	total RNA	Monosomy 3	blastocyst
-Monosomy_4 [16742]	GSM3144840	SRA	Monosomy 4 embryo	Homo sapiens	total RNA	Monosomy 4	blastocyst
-Monosomy_4 [16794]	GSM3144841	SRA	Monosomy 4 embryo	Homo sapiens	total RNA	Monosomy 4	blastocyst
-Monosomy_5 [16741]	GSM3144842	SRA	Monosomy 5 embryo	Homo sapiens	total RNA	Monosomy 5	blastocyst
-Monosomy_5 [16750]	GSM3144843	SRA	Monosomy 5 embryo	Homo sapiens	total RNA	Monosomy 5	blastocyst
-Monosomy_6 [16724]	GSM3144844	SRA	Monosomy 6 embryo	Homo sapiens	total RNA	Monosomy 6	blastocyst
-Monosomy_7 [16726]	GSM3144845	SRA	Monosomy 7 embryo	Homo sapiens	total RNA	Monosomy 7	blastocyst
-Monosomy_7 [16730]	GSM3144846	SRA	Monosomy 7 embryo	Homo sapiens	total RNA	Monosomy 7	blastocyst
-Monosomy_8 [16781]	GSM3144847	SRA	Monosomy 8 embryo	Homo sapiens	total RNA	Monosomy 8	blastocyst
-Monosomy_8 [16792]	GSM3144848	SRA	Monosomy 8 embryo	Homo sapiens	total RNA	Monosomy 8	blastocyst
-Monosomy_9 [16754]	GSM3144849	SRA	Monosomy 9 embryo	Homo sapiens	total RNA	Monosomy 9	blastocyst
-Monosomy_9 [16775]	GSM3144850	SRA	Monosomy 9 embryo	Homo sapiens	total RNA	Monosomy 9	blastocyst
-Monosomy_XO [16145]	GSM3144851	SRA	Monosomy XO embryo	Homo sapiens	total RNA	Monosomy XO	blastocyst
-Monosomy_XO [16146]	GSM3144852	SRA	Monosomy XO embryo	Homo sapiens	total RNA	Monosomy XO	blastocyst
+title	geo_accession	type	source_name_ch1	organism_ch1	molecule_ch1	cell type:ch1	differentiation length:ch1	passages:ch1	ploidy:ch1
+C2A	GSM2719212	SRA	trisomic_IPSC	Homo sapiens	polyA RNA	human induced pluripotent stem cells (iPSCs)	NA	3	trisomic
+C2B	GSM2719213	SRA	trisomic_IPSC	Homo sapiens	polyA RNA	human induced pluripotent stem cells (iPSCs)	NA	5	trisomic
+C2C	GSM2719214	SRA	trisomic_IPSC	Homo sapiens	polyA RNA	human induced pluripotent stem cells (iPSCs)	NA	12	trisomic
+C244-A	GSM2719215	SRA	disomic_IPSC	Homo sapiens	polyA RNA	human induced pluripotent stem cells (iPSCs)	NA	3	disomic
+C244-B	GSM2719216	SRA	disomic_IPSC	Homo sapiens	polyA RNA	human induced pluripotent stem cells (iPSCs)	NA	5	disomic
+C243	GSM2719217	SRA	disomic_IPSC	Homo sapiens	polyA RNA	human induced pluripotent stem cells (iPSCs)	NA	10	disomic
+C2-1	GSM2719218	SRA	trisomic_IPSC Derived Neurons	Homo sapiens	polyA RNA	IPSC-derived Neurons	40 days	NA	trisomic
+C2-2	GSM2719219	SRA	trisomic_IPSC Derived Neurons	Homo sapiens	polyA RNA	IPSC-derived Neurons	40 days	NA	trisomic
+C2-3	GSM2719220	SRA	trisomic_IPSC Derived Neurons	Homo sapiens	polyA RNA	IPSC-derived Neurons	40 days	NA	trisomic
+C3-1	GSM2719221	SRA	disomic_IPSC Derived Neurons	Homo sapiens	polyA RNA	IPSC-derived Neurons	40 days	NA	disomic
+C3-2	GSM2719222	SRA	disomic_IPSC Derived Neurons	Homo sapiens	polyA RNA	IPSC-derived Neurons	40 days	NA	disomic
+C3-4	GSM2719223	SRA	disomic_IPSC Derived Neurons	Homo sapiens	polyA RNA	IPSC-derived Neurons	40 days	NA	disomic

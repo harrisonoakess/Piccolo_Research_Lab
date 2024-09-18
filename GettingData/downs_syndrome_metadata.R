@@ -2,11 +2,11 @@ library(tidyverse)
 library(GEOquery)
 
 
-new_series_ID = "GSE114559" # Replace with series ID or GEO Ascension found on Omnibus Geo Query
+new_series_ID = "GSE222365" # Replace with series ID or GEO Ascension found on Omnibus Geo Query
 
-# RNA_series_ID = c("GSE101942", "GSE114559", "GSE121065", "GSE124252", "GSE124513", "GSE126910", "GSE128614", "GSE128621", "GSE131249", "GSE144857", "GSE151282", 
-#                   "GSE154418", "GSE160637", "GSE160690", "GSE166849", "GSE167021", "GSE183701", "GSE188568", "GSE190053", "GSE190305", "GSE201093", "GSE203257", 
-#                   "GSE208575", "GSE222365", "GSE42142", "GSE52249", "GSE55504", "GSE79842", "GSE84531", "GSE95552")
+RNA_series_ID = c("GSE101942", "GSE114559", "GSE121065", "GSE124252", "GSE124513", "GSE126910", "GSE128614", "GSE128621", "GSE131249", "GSE144857", "GSE151282",
+                  "GSE154418", "GSE160637", "GSE160690", "GSE166849", "GSE167021", "GSE183701", "GSE188568", "GSE190053", "GSE190305", "GSE201093", "GSE203257",
+                  "GSE208575", "GSE222365", "GSE42142", "GSE52249", "GSE55504", "GSE79842", "GSE84531", "GSE95552")
 
 temp_file_location <- "Data/Metadata/temp_file.tsv"
 
@@ -14,7 +14,7 @@ get_metadata <- function(series_ID, file_location) {
   metadata <- getGEO(series_ID)[[1]] # retrieves metadata using GEOquery function
   
   metadata = as_tibble(pData(metadata))
-  view(metadata)
+  # view(metadata)
  
   write_tsv(metadata, file_location) # writes metadata to a temporary file
 }
@@ -44,7 +44,8 @@ drop_cols <- function(temp_file_location, series_ID) {
   metadata_filtered <- metadata %>% # drop columns that are not needed based on above criteria
     select(-cols_to_drop)
   
-  # view(metadata_filtered)
+   # assign(paste0(series_ID, "_metadata_filtered"), metadata_filtered)
+   # view(get(paste0(series_ID, "_metadata_filtered")))
   
   file.remove(temp_file_location) # remove temporary file
   
@@ -54,15 +55,15 @@ drop_cols <- function(temp_file_location, series_ID) {
 
 process_metadata <- function(series_ID, temp_file_location) {
   if (file.exists(temp_file_location)) { # check if temporary file exists
-    drop_cols(temp_file_location) # if it does, drop columns
+    drop_cols(temp_file_location, series_ID) # if it does, drop columns
   } else {
     get_metadata(series_ID, temp_file_location) # if it doesn't, get metadata and drop columns
     drop_cols(temp_file_location, series_ID)
   }
 }
 
-process_metadata(new_series_ID, temp_file_location)
+# process_metadata(new_series_ID, temp_file_location)
 
-# for (i in RNA_series_ID) { # loop through all series IDs
-#   proccess_metadata(i, temp_file_location)
-# }
+for (i in RNA_series_ID) { # loop through all series IDs
+  process_metadata(i, temp_file_location)
+}

@@ -19,13 +19,13 @@ get_data <- function(series_ID) {
   pivot_longer(data, 2:ncol(data), names_to = "sample_id", values_to = "values") %>% # switches columns with first row
     pivot_wider(names_from = "GeneID", values_from = "values") -> transposed_data
   
-  # view(transposed_data)
+   view(transposed_data)
   
   file_location <- "Data/TransposedData/"
   write_tsv(transposed_data, paste0(file_location, series_ID, "_transposed.tsv")) # writes trasnposed data to a tsv file
 }
 
-# get_data(new_series_ID)
+ get_data(new_series_ID)
 
 
 for (i in RNA_series_ID) { # loops through all RNA series IDs
