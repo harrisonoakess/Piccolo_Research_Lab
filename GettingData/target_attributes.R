@@ -41,7 +41,9 @@ append_tibble <- function(series_ID, temp_file_location, target_attributes) {
   for (i in 1:nrow(metadata_tibble)){
     row = metadata_tibble[i, ]
     # view(row)
-    cols_to_drop <- names(metadata)[grepl("contact", names(metadata))]
+    column_name <- names(metadata)[grepl("cell type", names(metadata)) |
+                                      grepl("cell_type", names(metadata))]
+    
     
     current_sex = "Female"
     current_ploidy = "Disomy"
