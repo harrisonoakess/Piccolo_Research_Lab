@@ -7,11 +7,11 @@ library(GEOquery)
 #----------------------data-----------------------------------------------------
 # setwd("C:/Users/hoakes/Documents/Piccolo_Research_Lab")
   
-RNA_series_ID = c("GSE128621")
+# RNA_series_ID = c("GSE128621")
 
-# RNA_series_ID = c("GSE101942", "GSE114559", "GSE121065", "GSE124252", "GSE124513", "GSE126910", "GSE128614", "GSE128621", "GSE131249", "GSE144857", "GSE151282",
-#                   "GSE154418", "GSE160637", "GSE160690", "GSE166849", "GSE167021", "GSE183701", "GSE188568", "GSE190053", "GSE190305", "GSE201093", "GSE203257",
-#                   "GSE208575", "GSE222365", "GSE42142", "GSE52249", "GSE55504", "GSE79842", "GSE84531", "GSE95552")
+RNA_series_ID = c("GSE101942", "GSE114559", "GSE121065", "GSE124252", "GSE124513", "GSE126910", "GSE128614", "GSE128621", "GSE131249", "GSE144857", "GSE151282",
+                  "GSE154418", "GSE160637", "GSE160690", "GSE166849", "GSE167021", "GSE183701", "GSE188568", "GSE190053", "GSE190305", "GSE201093", "GSE203257",
+                  "GSE208575", "GSE222365", "GSE42142", "GSE52249", "GSE55504", "GSE79842", "GSE84531", "GSE95552")
 
 temp_file_location <- "Data/Metadata/temp_file_target_data.tsv"
 
@@ -55,14 +55,19 @@ append_tibble <- function(series_ID, temp_file_location, target_attributes) {
     column_name <- names(metadata)[grepl("geo", names(metadata))]
     # View(column_name)
     if (length(column_name) != 0) {
-      print("working")
       ID = row[[column_name]]
     }
     
-    if (any(str_detect(row, regex("female", ignore_case = TRUE)))){
+    if (any(str_detect(row, regex("female", ignore_case = TRUE)), na.rm = TRUE)){
       current_sex = "female"
-    } else if (any(str_detect(row, regex("male", ignore_case = TRUE)))){
+    } else if (any(str_detect(row, regex("male", ignore_case = TRUE)), na.rm = TRUE)){
       current_sex = "male"
+    }
+    
+    if (any(str_detect(row, regex("trisomic | trisomy", ignore_case = TRUE)), na.rm = TRUE)){
+      current_ploidy = "trisomic"
+    } else if (any(str_detect(row, regex("disomic | disomy | WT | normal", ignore_case = TRUE)), na.rm = TRUE)){
+      current_ploidy = "disomic"
     }
     
     target_attributes <- add_row(target_attributes, geo_accession = ID , sex = current_sex, ploidy = current_ploidy, cell_type = current_cell_type)

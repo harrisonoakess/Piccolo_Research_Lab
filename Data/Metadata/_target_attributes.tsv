@@ -1,0 +1,614 @@
+geo_accession	sex	ploidy	cell_type
+GSM2719212	n/a	trisomic	human induced pluripotent stem cells (iPSCs)
+GSM2719213	n/a	trisomic	human induced pluripotent stem cells (iPSCs)
+GSM2719214	n/a	trisomic	human induced pluripotent stem cells (iPSCs)
+GSM2719215	n/a	trisomic	human induced pluripotent stem cells (iPSCs)
+GSM2719216	n/a	trisomic	human induced pluripotent stem cells (iPSCs)
+GSM2719217	n/a	trisomic	human induced pluripotent stem cells (iPSCs)
+GSM2719218	n/a	trisomic	IPSC-derived Neurons
+GSM2719219	n/a	trisomic	IPSC-derived Neurons
+GSM2719220	n/a	trisomic	IPSC-derived Neurons
+GSM2719221	n/a	trisomic	IPSC-derived Neurons
+GSM2719222	n/a	trisomic	IPSC-derived Neurons
+GSM2719223	n/a	trisomic	IPSC-derived Neurons
+GSM3144752	n/a	disomic	n/a
+GSM3144753	n/a	disomic	n/a
+GSM3144754	n/a	disomic	n/a
+GSM3144755	n/a	disomic	n/a
+GSM3144756	n/a	disomic	n/a
+GSM3144757	n/a	trisomic	n/a
+GSM3144758	n/a	trisomic	n/a
+GSM3144759	n/a	trisomic	n/a
+GSM3144760	n/a	trisomic	n/a
+GSM3144761	n/a	trisomic	n/a
+GSM3144762	n/a	trisomic	n/a
+GSM3144763	n/a	trisomic	n/a
+GSM3144764	n/a	trisomic	n/a
+GSM3144765	n/a	trisomic	n/a
+GSM3144766	n/a	trisomic	n/a
+GSM3144767	n/a	trisomic	n/a
+GSM3144768	n/a	trisomic	n/a
+GSM3144769	n/a	trisomic	n/a
+GSM3144770	n/a	trisomic	n/a
+GSM3144771	n/a	trisomic	n/a
+GSM3144772	n/a	trisomic	n/a
+GSM3144773	n/a	trisomic	n/a
+GSM3144774	n/a	trisomic	n/a
+GSM3144775	n/a	trisomic	n/a
+GSM3144776	n/a	trisomic	n/a
+GSM3144777	n/a	trisomic	n/a
+GSM3144778	n/a	trisomic	n/a
+GSM3144779	n/a	trisomic	n/a
+GSM3144780	n/a	trisomic	n/a
+GSM3144781	n/a	trisomic	n/a
+GSM3144782	n/a	trisomic	n/a
+GSM3144783	n/a	trisomic	n/a
+GSM3144784	n/a	trisomic	n/a
+GSM3144785	n/a	trisomic	n/a
+GSM3144786	n/a	trisomic	n/a
+GSM3144787	n/a	trisomic	n/a
+GSM3144788	n/a	trisomic	n/a
+GSM3144789	n/a	trisomic	n/a
+GSM3144790	n/a	trisomic	n/a
+GSM3144791	n/a	trisomic	n/a
+GSM3144792	n/a	trisomic	n/a
+GSM3144793	n/a	trisomic	n/a
+GSM3144794	n/a	trisomic	n/a
+GSM3144795	n/a	trisomic	n/a
+GSM3144796	n/a	trisomic	n/a
+GSM3144797	n/a	trisomic	n/a
+GSM3144798	n/a	trisomic	n/a
+GSM3144799	n/a	trisomic	n/a
+GSM3144800	n/a	trisomic	n/a
+GSM3144801	n/a	trisomic	n/a
+GSM3144802	n/a	trisomic	n/a
+GSM3144803	n/a	trisomic	n/a
+GSM3144804	n/a	trisomic	n/a
+GSM3144805	n/a	trisomic	n/a
+GSM3144806	n/a	trisomic	n/a
+GSM3144807	n/a	trisomic	n/a
+GSM3144808	n/a	trisomic	n/a
+GSM3144809	n/a	trisomic	n/a
+GSM3144810	n/a	n/a	n/a
+GSM3144811	n/a	n/a	n/a
+GSM3144812	n/a	n/a	n/a
+GSM3144813	n/a	n/a	n/a
+GSM3144814	n/a	n/a	n/a
+GSM3144815	n/a	n/a	n/a
+GSM3144816	n/a	n/a	n/a
+GSM3144817	n/a	n/a	n/a
+GSM3144818	n/a	n/a	n/a
+GSM3144819	n/a	n/a	n/a
+GSM3144820	n/a	n/a	n/a
+GSM3144821	n/a	n/a	n/a
+GSM3144822	n/a	n/a	n/a
+GSM3144823	n/a	n/a	n/a
+GSM3144824	n/a	n/a	n/a
+GSM3144825	n/a	n/a	n/a
+GSM3144826	n/a	n/a	n/a
+GSM3144827	n/a	n/a	n/a
+GSM3144828	n/a	n/a	n/a
+GSM3144829	n/a	n/a	n/a
+GSM3144830	n/a	n/a	n/a
+GSM3144831	n/a	n/a	n/a
+GSM3144832	n/a	n/a	n/a
+GSM3144833	n/a	n/a	n/a
+GSM3144834	n/a	n/a	n/a
+GSM3144835	n/a	n/a	n/a
+GSM3144836	n/a	n/a	n/a
+GSM3144837	n/a	n/a	n/a
+GSM3144838	n/a	n/a	n/a
+GSM3144839	n/a	n/a	n/a
+GSM3144840	n/a	n/a	n/a
+GSM3144841	n/a	n/a	n/a
+GSM3144842	n/a	n/a	n/a
+GSM3144843	n/a	n/a	n/a
+GSM3144844	n/a	n/a	n/a
+GSM3144845	n/a	n/a	n/a
+GSM3144846	n/a	n/a	n/a
+GSM3144847	n/a	n/a	n/a
+GSM3144848	n/a	n/a	n/a
+GSM3144849	n/a	n/a	n/a
+GSM3144850	n/a	n/a	n/a
+GSM3144851	n/a	n/a	n/a
+GSM3144852	n/a	n/a	n/a
+GSM3425394	n/a	disomic	B-ALL cell line
+GSM3425395	n/a	disomic	B-ALL cell line
+GSM3425396	n/a	disomic	B-ALL cell line
+GSM3425397	n/a	disomic	B-ALL cell line
+GSM3425398	n/a	disomic	B-ALL cell line
+GSM3425399	n/a	disomic	B-ALL cell line
+GSM3425400	n/a	disomic	B-ALL cell line
+GSM3425401	n/a	disomic	B-ALL cell line
+GSM3526396	n/a	n/a	n/a
+GSM3526397	n/a	trisomic	n/a
+GSM3526398	n/a	n/a	n/a
+GSM3526399	n/a	trisomic	n/a
+GSM3526400	n/a	n/a	n/a
+GSM3526401	n/a	trisomic	n/a
+GSM3526402	n/a	n/a	n/a
+GSM3526403	n/a	n/a	n/a
+GSM3526404	n/a	trisomic	n/a
+GSM3526405	n/a	n/a	n/a
+GSM3526406	n/a	n/a	n/a
+GSM3526407	n/a	n/a	n/a
+GSM3526408	n/a	n/a	n/a
+GSM3526409	n/a	n/a	n/a
+GSM3526410	n/a	n/a	n/a
+GSM3535590	n/a	disomic	iPSC derived cells
+GSM3535591	n/a	disomic	iPSC derived cells
+GSM3535592	n/a	disomic	iPSC derived cells
+GSM3535593	n/a	disomic	iPSC derived cells
+GSM3535594	n/a	disomic	iPSC derived cells
+GSM3535595	n/a	disomic	iPSC derived cells
+GSM3618029	male	disomic	n/a
+GSM3618030	male	disomic	n/a
+GSM3618031	male	disomic	n/a
+GSM3618032	male	disomic	n/a
+GSM3618033	male	disomic	n/a
+GSM3618034	male	disomic	n/a
+GSM3618035	male	disomic	n/a
+GSM3618036	male	disomic	n/a
+GSM3618037	male	disomic	n/a
+GSM3618038	male	disomic	n/a
+GSM3618039	male	disomic	n/a
+GSM3618040	male	disomic	n/a
+GSM3681110	female	n/a	n/a
+GSM3681112	female	n/a	n/a
+GSM3681114	female	n/a	n/a
+GSM3681116	female	n/a	n/a
+GSM3681118	female	n/a	n/a
+GSM3681181	male	n/a	WBC
+GSM3681182	male	n/a	WBC
+GSM3681183	male	n/a	WBC
+GSM3681184	female	n/a	WBC
+GSM3681185	male	n/a	WBC
+GSM3681186	male	n/a	WBC
+GSM3681187	female	n/a	WBC
+GSM3681188	female	n/a	WBC
+GSM3681189	male	n/a	WBC
+GSM3681190	male	n/a	WBC
+GSM3681191	female	n/a	WBC
+GSM3681192	male	n/a	WBC
+GSM3681193	male	n/a	WBC
+GSM3681194	male	n/a	WBC
+GSM3768070	n/a	trisomic	human colon carcinoma cell line
+GSM3768071	n/a	trisomic	human colon carcinoma cell line
+GSM3768072	n/a	trisomic	human colon carcinoma cell line
+GSM3768073	n/a	trisomic	human colon carcinoma cell line
+GSM3768074	n/a	trisomic	human colon carcinoma cell line
+GSM3768075	n/a	trisomic	human colon carcinoma cell line
+GSM3768076	n/a	trisomic	human colon carcinoma cell line
+GSM3768077	n/a	trisomic	human colon carcinoma cell line
+GSM3768078	n/a	trisomic	human colon carcinoma cell line
+GSM3768079	n/a	trisomic	human retinal pigment epithelial cell line,  immortalized with hTERT
+GSM3768080	n/a	trisomic	human retinal pigment epithelial cell line,  immortalized with hTERT
+GSM3768081	n/a	trisomic	human retinal pigment epithelial cell line,  immortalized with hTERT
+GSM3768082	n/a	trisomic	human retinal pigment epithelial cell line,  immortalized with hTERT
+GSM3768083	n/a	trisomic	human retinal pigment epithelial cell line,  immortalized with hTERT
+GSM3768084	n/a	trisomic	human retinal pigment epithelial cell line,  immortalized with hTERT
+GSM4299665	n/a	n/a	iPSC derived neurons
+GSM4299666	n/a	n/a	iPSC derived neurons
+GSM4299667	n/a	n/a	iPSC derived neurons
+GSM4299668	n/a	n/a	iPSC derived neurons
+GSM4299669	n/a	n/a	iPSC derived neurons
+GSM4299670	n/a	n/a	iPSCs
+GSM4299671	n/a	n/a	iPSCs
+GSM4299672	n/a	n/a	iPSCs
+GSM4299673	n/a	n/a	iPSCs
+GSM4299674	n/a	n/a	iPSCs
+GSM4299675	n/a	n/a	ESC derived neurons
+GSM4299676	n/a	n/a	ESC derived neurons
+GSM4299677	n/a	n/a	ESC derived neurons
+GSM4299678	n/a	n/a	ESC derived neurons
+GSM4299679	n/a	n/a	ESC derived neurons
+GSM4299680	n/a	n/a	ESCs
+GSM4299681	n/a	n/a	ESCs
+GSM4299682	n/a	n/a	ESCs
+GSM4299683	n/a	n/a	ESCs
+GSM4299684	n/a	n/a	ESCs
+GSM4299685	n/a	n/a	ESC derived neurons
+GSM4299686	n/a	n/a	ESC derived neurons
+GSM4299687	n/a	n/a	ESC derived neurons
+GSM4299688	n/a	n/a	ESC derived neurons
+GSM4299689	n/a	n/a	ESC derived neurons
+GSM4299690	n/a	n/a	ESCs
+GSM4299691	n/a	n/a	ESCs
+GSM4299692	n/a	n/a	ESCs
+GSM4299693	n/a	n/a	ESCs
+GSM4299694	n/a	n/a	ESCs
+GSM4299695	n/a	trisomic	iPSC derived neurons
+GSM4299696	n/a	trisomic	iPSC derived neurons
+GSM4299697	n/a	trisomic	iPSC derived neurons
+GSM4299698	n/a	trisomic	iPSC derived neurons
+GSM4299699	n/a	trisomic	iPSC derived neurons
+GSM4299700	n/a	trisomic	iPSCs
+GSM4299701	n/a	trisomic	iPSCs
+GSM4299702	n/a	trisomic	iPSCs
+GSM4299703	n/a	trisomic	iPSCs
+GSM4299704	n/a	trisomic	iPSCs
+GSM4570347	male	disomic	n/a
+GSM4570348	male	disomic	n/a
+GSM4570349	male	disomic	n/a
+GSM4570350	female	disomic	n/a
+GSM4570351	female	disomic	n/a
+GSM4570352	female	disomic	n/a
+GSM4570353	female	disomic	n/a
+GSM4570354	male	disomic	n/a
+GSM4670820	n/a	trisomic	Primary fibroblasts
+GSM4670821	n/a	trisomic	Primary fibroblasts
+GSM4670822	n/a	trisomic	Primary fibroblasts
+GSM4670823	n/a	trisomic	Primary fibroblasts
+GSM4670824	n/a	trisomic	Primary fibroblasts
+GSM4670825	n/a	trisomic	Primary fibroblasts
+GSM4670826	n/a	trisomic	Primary fibroblasts
+GSM4670827	n/a	trisomic	Primary fibroblasts
+GSM4670828	n/a	trisomic	Primary fibroblasts
+GSM4670829	n/a	trisomic	Primary fibroblasts
+GSM4670830	n/a	trisomic	Primary fibroblasts
+GSM4670831	n/a	disomic	Primary fibroblasts
+GSM4670832	n/a	disomic	Primary fibroblasts
+GSM4670833	n/a	disomic	Primary fibroblasts
+GSM4670834	n/a	disomic	Primary fibroblasts
+GSM4670835	n/a	disomic	Primary fibroblasts
+GSM4670836	n/a	disomic	Primary fibroblasts
+GSM4876252	n/a	disomic	Normal primary fetal liver human CD34+
+GSM4876253	n/a	disomic	Normal primary fetal liver human CD34+
+GSM4876254	n/a	disomic	Normal primary human CD34+
+GSM4876255	n/a	n/a	DS primary fetal liver human CD34+
+GSM4876256	n/a	n/a	DS primary fetal liver human CD34+
+GSM4876257	n/a	n/a	DS primary fetal liver human CD34+
+GSM4877084	n/a	disomic	n/a
+GSM4877085	n/a	disomic	n/a
+GSM4877086	n/a	trisomic	n/a
+GSM4877087	n/a	trisomic	n/a
+GSM4877088	n/a	trisomic	n/a
+GSM5086593	n/a	n/a	induced pluripotent stem cells
+GSM5086594	n/a	n/a	induced pluripotent stem cells
+GSM5086595	n/a	n/a	induced pluripotent stem cells
+GSM5086596	n/a	n/a	induced pluripotent stem cells
+GSM5086597	n/a	n/a	induced pluripotent stem cells
+GSM5086598	n/a	n/a	induced pluripotent stem cells
+GSM5086599	n/a	n/a	induced pluripotent stem cells
+GSM5086600	n/a	n/a	induced pluripotent stem cells
+GSM5086601	n/a	n/a	induced pluripotent stem cells
+GSM5086602	n/a	n/a	induced pluripotent stem cells
+GSM5086603	n/a	n/a	induced pluripotent stem cells
+GSM5086604	n/a	n/a	induced pluripotent stem cells
+GSM5086605	n/a	n/a	induced pluripotent stem cells
+GSM5086606	n/a	n/a	induced pluripotent stem cells
+GSM5086607	n/a	n/a	induced pluripotent stem cells
+GSM5086608	n/a	n/a	induced pluripotent stem cells
+GSM5086609	n/a	trisomic	induced pluripotent stem cells
+GSM5086610	n/a	trisomic	induced pluripotent stem cells
+GSM5086611	n/a	trisomic	induced pluripotent stem cells
+GSM5086612	n/a	trisomic	induced pluripotent stem cells
+GSM5086613	n/a	trisomic	induced pluripotent stem cells
+GSM5086614	n/a	trisomic	induced pluripotent stem cells
+GSM5086615	n/a	trisomic	induced pluripotent stem cells
+GSM5086616	n/a	trisomic	induced pluripotent stem cells
+GSM5086617	n/a	disomic	induced pluripotent stem cells
+GSM5086618	n/a	disomic	induced pluripotent stem cells
+GSM5086619	n/a	disomic	induced pluripotent stem cells
+GSM5086620	n/a	disomic	induced pluripotent stem cells
+GSM5086621	n/a	disomic	induced pluripotent stem cells
+GSM5086622	n/a	disomic	induced pluripotent stem cells
+GSM5086623	n/a	disomic	induced pluripotent stem cells
+GSM5086624	n/a	disomic	induced pluripotent stem cells
+GSM5086625	n/a	disomic	induced pluripotent stem cells
+GSM5086626	n/a	disomic	induced pluripotent stem cells
+GSM5086627	n/a	disomic	induced pluripotent stem cells
+GSM5086628	n/a	disomic	induced pluripotent stem cells
+GSM5086629	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086630	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086631	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086632	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086633	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086634	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086635	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086636	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086637	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086638	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086639	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086640	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086641	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086642	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086643	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086644	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086645	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086646	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086647	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086648	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086649	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086650	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086651	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086652	n/a	n/a	iPS cell line derived Endothelial Cells
+GSM5086653	n/a	trisomic	iPS cell line derived Endothelial Cells
+GSM5086654	n/a	trisomic	iPS cell line derived Endothelial Cells
+GSM5086655	n/a	trisomic	iPS cell line derived Endothelial Cells
+GSM5086656	n/a	trisomic	iPS cell line derived Endothelial Cells
+GSM5086657	n/a	trisomic	iPS cell line derived Endothelial Cells
+GSM5086658	n/a	trisomic	iPS cell line derived Endothelial Cells
+GSM5086659	n/a	disomic	iPS cell line derived Endothelial Cells
+GSM5086660	n/a	disomic	iPS cell line derived Endothelial Cells
+GSM5086661	n/a	disomic	iPS cell line derived Endothelial Cells
+GSM5086662	n/a	disomic	iPS cell line derived Endothelial Cells
+GSM5086663	n/a	disomic	iPS cell line derived Endothelial Cells
+GSM5086664	n/a	disomic	iPS cell line derived Endothelial Cells
+GSM5090903	n/a	n/a	Human thymic epithelial cell
+GSM5090904	n/a	n/a	Human thymic epithelial cell
+GSM5090905	n/a	n/a	Human thymic epithelial cell
+GSM5090906	n/a	n/a	Human thymic epithelial cell
+GSM5090907	n/a	n/a	Human thymic epithelial cell
+GSM5090908	n/a	n/a	Human thymic epithelial cell
+GSM5090909	n/a	n/a	Human thymic epithelial cell
+GSM5090910	n/a	n/a	Human thymic epithelial cell
+GSM5090911	n/a	n/a	Human thymic epithelial cell
+GSM5090912	n/a	n/a	Human thymic epithelial cell
+GSM5090913	n/a	n/a	Human thymic epithelial cell
+GSM5090914	n/a	n/a	Human thymic epithelial cell
+GSM5567995	female	n/a	n/a
+GSM5567996	female	n/a	n/a
+GSM5567997	female	n/a	n/a
+GSM5567998	female	n/a	n/a
+GSM5567999	female	n/a	n/a
+GSM5568000	female	n/a	n/a
+GSM5568001	male	n/a	n/a
+GSM5568002	male	n/a	n/a
+GSM5568003	male	n/a	n/a
+GSM5568004	male	n/a	n/a
+GSM5568005	male	n/a	n/a
+GSM5568006	male	n/a	n/a
+GSM5568007	female	n/a	n/a
+GSM5568008	female	n/a	n/a
+GSM5568009	female	n/a	n/a
+GSM5568010	female	n/a	n/a
+GSM5568011	female	n/a	n/a
+GSM5568012	female	n/a	n/a
+GSM5568013	female	n/a	n/a
+GSM5568014	female	n/a	n/a
+GSM5568015	female	n/a	n/a
+GSM5568016	female	n/a	n/a
+GSM5568017	female	n/a	n/a
+GSM5568018	female	n/a	n/a
+GSM5568019	female	n/a	n/a
+GSM5568020	female	n/a	n/a
+GSM5568021	female	n/a	n/a
+GSM5568022	male	n/a	n/a
+GSM5568023	male	n/a	n/a
+GSM5568024	male	n/a	n/a
+GSM5568025	male	n/a	n/a
+GSM5568026	male	n/a	n/a
+GSM5568027	male	n/a	n/a
+GSM5568028	female	n/a	n/a
+GSM5568029	female	n/a	n/a
+GSM5568030	male	n/a	n/a
+GSM5568031	male	n/a	n/a
+GSM5568032	male	n/a	n/a
+GSM5568033	male	n/a	n/a
+GSM5568034	male	n/a	n/a
+GSM5568035	male	n/a	n/a
+GSM5568036	male	n/a	n/a
+GSM5568037	male	n/a	n/a
+GSM5568038	male	n/a	n/a
+GSM5568039	male	n/a	n/a
+GSM5568040	female	n/a	n/a
+GSM5568041	female	n/a	n/a
+GSM5568042	female	n/a	n/a
+GSM5568043	male	n/a	n/a
+GSM5568044	male	n/a	n/a
+GSM5568045	male	n/a	n/a
+GSM5568046	female	n/a	n/a
+GSM5568047	female	n/a	n/a
+GSM5568048	female	n/a	n/a
+GSM5568049	female	n/a	n/a
+GSM5568050	female	n/a	n/a
+GSM5568051	female	n/a	n/a
+GSM5568052	male	n/a	n/a
+GSM5568053	male	n/a	n/a
+GSM5568054	male	n/a	n/a
+GSM5568055	male	n/a	n/a
+GSM5568056	male	n/a	n/a
+GSM5568057	male	n/a	n/a
+GSM5568058	female	n/a	n/a
+GSM5568059	female	n/a	n/a
+GSM5568060	female	n/a	n/a
+GSM5568061	male	n/a	n/a
+GSM5568062	male	n/a	n/a
+GSM5568063	male	n/a	n/a
+GSM5568064	female	n/a	n/a
+GSM5568065	male	n/a	n/a
+GSM5568066	female	n/a	n/a
+GSM5568067	female	n/a	n/a
+GSM5568068	male	n/a	n/a
+GSM5568069	female	n/a	n/a
+GSM5685639	n/a	disomic	Megakaryocytes
+GSM5685640	n/a	disomic	Megakaryocytes
+GSM5685641	n/a	disomic	Megakaryocytes
+GSM5685642	n/a	disomic	Megakaryocytes
+GSM5685643	n/a	disomic	Megakaryocytes
+GSM5685644	n/a	disomic	Megakaryocytes
+GSM5685645	n/a	disomic	Megakaryocytes
+GSM5685646	n/a	disomic	Megakaryocytes
+GSM5685647	n/a	disomic	Megakaryocytes
+GSM5685648	n/a	disomic	Megakaryocytes
+GSM5685649	n/a	disomic	Megakaryocytes
+GSM5685650	n/a	disomic	Megakaryocytes
+GSM5685651	n/a	disomic	HSPCs
+GSM5685652	n/a	disomic	HSPCs
+GSM5685653	n/a	disomic	HSPCs
+GSM5685654	n/a	disomic	HSPCs
+GSM5685655	n/a	disomic	HSPCs
+GSM5685656	n/a	disomic	HSPCs
+GSM5712645	n/a	n/a	Neuroepithelial stem cells
+GSM5712646	n/a	n/a	Neuroepithelial stem cells
+GSM5712647	n/a	n/a	Neuroepithelial stem cells
+GSM5712648	n/a	trisomic	Neuroepithelial stem cells
+GSM5712649	n/a	trisomic	Neuroepithelial stem cells
+GSM5712650	n/a	trisomic	Neuroepithelial stem cells
+GSM5712651	n/a	trisomic	Neuroepithelial stem cells
+GSM5712652	n/a	trisomic	Neuroepithelial stem cells
+GSM5712653	n/a	trisomic	Neuroepithelial stem cells
+GSM5712654	n/a	n/a	Neuroepithelial stem cells
+GSM5712655	n/a	n/a	Neuroepithelial stem cells
+GSM5712656	n/a	n/a	Neuroepithelial stem cells
+GSM5712657	n/a	n/a	Neuroepithelial stem cells
+GSM5712658	n/a	n/a	Neuroepithelial stem cells
+GSM5712659	n/a	n/a	Neuroepithelial stem cells
+GSM5712660	n/a	n/a	Neuroepithelial stem cells
+GSM5712661	n/a	n/a	Neuroepithelial stem cells
+GSM5712662	n/a	n/a	Neuroepithelial stem cells
+GSM5719536	n/a	disomic	hiPSC-derived neural crest stem cells
+GSM5719537	n/a	disomic	hiPSC-derived neural crest stem cells
+GSM6050562	n/a	disomic	n/a
+GSM6050563	n/a	disomic	n/a
+GSM6050564	n/a	disomic	n/a
+GSM6050565	n/a	disomic	n/a
+GSM6050566	n/a	disomic	n/a
+GSM6050567	n/a	disomic	n/a
+GSM6050568	n/a	disomic	n/a
+GSM6050569	n/a	disomic	n/a
+GSM6050570	n/a	disomic	n/a
+GSM6050571	n/a	disomic	n/a
+GSM6050572	n/a	disomic	n/a
+GSM6050573	n/a	disomic	n/a
+GSM6165373	n/a	n/a	endothelial cells
+GSM6165374	n/a	n/a	endothelial cells
+GSM6165375	n/a	n/a	endothelial cells
+GSM6165376	n/a	trisomic	endothelial cells
+GSM6165377	n/a	trisomic	endothelial cells
+GSM6351542	n/a	n/a	n/a
+GSM6351543	n/a	n/a	n/a
+GSM6351544	n/a	n/a	n/a
+GSM6351545	n/a	n/a	n/a
+GSM6351546	n/a	n/a	n/a
+GSM6351547	n/a	n/a	n/a
+GSM6351548	n/a	n/a	n/a
+GSM6351549	n/a	n/a	n/a
+GSM6351550	n/a	n/a	n/a
+GSM6921577	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921578	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921579	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921580	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921581	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921582	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921583	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921584	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921585	n/a	n/a	iPSC-derived cerebral organoid
+GSM6921586	n/a	n/a	iPSC-derived cerebral organoid
+GSM1033470	n/a	disomic	n/a
+GSM1033471	n/a	disomic	n/a
+GSM1033472	n/a	disomic	n/a
+GSM1033473	n/a	disomic	n/a
+GSM1033474	n/a	disomic	n/a
+GSM1033475	n/a	trisomic	n/a
+GSM1033476	n/a	trisomic	n/a
+GSM1033477	n/a	trisomic	n/a
+GSM1033478	n/a	trisomic	n/a
+GSM1261902	n/a	n/a	induced pluripotent stem cells
+GSM1261903	n/a	n/a	induced pluripotent stem cells
+GSM1261904	n/a	n/a	induced pluripotent stem cells
+GSM1261905	n/a	n/a	induced pluripotent stem cells
+GSM1261906	n/a	trisomic	induced pluripotent stem cells
+GSM1261907	n/a	trisomic	induced pluripotent stem cells
+GSM1261908	n/a	trisomic	induced pluripotent stem cells
+GSM1338311	n/a	trisomic	n/a
+GSM1338312	n/a	disomic	n/a
+GSM1338313	n/a	trisomic	n/a
+GSM1338314	n/a	disomic	n/a
+GSM1338319	n/a	disomic	n/a
+GSM1338320	n/a	disomic	n/a
+GSM1338321	n/a	trisomic	n/a
+GSM1338322	n/a	disomic	n/a
+GSM1338325	n/a	disomic	n/a
+GSM1338326	n/a	disomic	n/a
+GSM1338327	n/a	disomic	n/a
+GSM1338328	n/a	disomic	n/a
+GSM1338329	n/a	disomic	n/a
+GSM1338330	n/a	disomic	n/a
+GSM1338331	n/a	disomic	n/a
+GSM1338332	n/a	disomic	n/a
+GSM1338333	n/a	trisomic	n/a
+GSM1338334	n/a	trisomic	n/a
+GSM1338335	n/a	trisomic	n/a
+GSM1338336	n/a	trisomic	n/a
+GSM1338337	n/a	trisomic	n/a
+GSM1338338	n/a	trisomic	n/a
+GSM1338339	n/a	trisomic	n/a
+GSM1338340	n/a	trisomic	n/a
+GSM2105034	female	disomic	n/a
+GSM2105037	female	disomic	n/a
+GSM2105039	male	disomic	n/a
+GSM2105042	male	disomic	n/a
+GSM2105044	female	disomic	n/a
+GSM2105047	female	disomic	n/a
+GSM2105049	female	disomic	n/a
+GSM2105052	female	disomic	n/a
+GSM2105054	male	disomic	n/a
+GSM2105057	male	disomic	n/a
+GSM2105059	male	disomic	n/a
+GSM2105062	male	disomic	n/a
+GSM2105065	female	trisomic	n/a
+GSM2105067	female	trisomic	n/a
+GSM2105070	male	trisomic	n/a
+GSM2105072	male	trisomic	n/a
+GSM2105075	male	trisomic	n/a
+GSM2105077	male	trisomic	n/a
+GSM2105080	female	trisomic	n/a
+GSM2105082	female	trisomic	n/a
+GSM2105085	female	trisomic	n/a
+GSM2105087	female	trisomic	n/a
+GSM2105090	male	trisomic	n/a
+GSM2105092	male	trisomic	n/a
+GSM2105095	female	disomic	n/a
+GSM2105097	female	disomic	n/a
+GSM2105099	female	disomic	n/a
+GSM2105102	female	disomic	n/a
+GSM2105105	female	disomic	n/a
+GSM2105107	female	disomic	n/a
+GSM2105110	female	trisomic	n/a
+GSM2105112	female	trisomic	n/a
+GSM2105115	female	trisomic	n/a
+GSM2105117	female	trisomic	n/a
+GSM2105120	female	trisomic	n/a
+GSM2105123	female	trisomic	n/a
+GSM2241547	female	n/a	n/a
+GSM2241548	female	n/a	n/a
+GSM2241549	male	n/a	n/a
+GSM2241550	male	n/a	n/a
+GSM2241551	female	n/a	n/a
+GSM2241552	female	n/a	n/a
+GSM2241553	female	n/a	n/a
+GSM2241554	female	n/a	n/a
+GSM2241555	male	n/a	n/a
+GSM2241556	male	n/a	n/a
+GSM2241557	male	n/a	n/a
+GSM2241558	male	n/a	n/a
+GSM2241559	female	n/a	n/a
+GSM2241560	female	n/a	n/a
+GSM2241561	male	n/a	n/a
+GSM2241562	male	n/a	n/a
+GSM2241563	male	n/a	n/a
+GSM2241564	male	n/a	n/a
+GSM2241565	female	n/a	n/a
+GSM2241566	female	n/a	n/a
+GSM2241567	female	n/a	n/a
+GSM2241568	female	n/a	n/a
+GSM2241569	male	n/a	n/a
+GSM2241570	male	n/a	n/a
+GSM2241571	female	n/a	n/a
+GSM2241572	female	n/a	n/a
+GSM2241573	female	n/a	n/a
+GSM2241574	female	n/a	n/a
+GSM2241575	female	n/a	n/a
+GSM2241576	female	n/a	n/a
+GSM2241577	female	n/a	n/a
+GSM2241578	female	n/a	n/a
+GSM2241579	female	n/a	n/a
+GSM2241580	female	n/a	n/a
+GSM2516201	n/a	disomic	in vitro differentiated cells
+GSM2516202	n/a	disomic	in vitro differentiated cells
+GSM2516203	n/a	disomic	in vitro differentiated cells
+GSM2516204	n/a	disomic	in vitro differentiated cells
+GSM2516205	n/a	disomic	in vitro differentiated cells
+GSM2516206	n/a	disomic	in vitro differentiated cells
