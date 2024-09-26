@@ -1,0 +1,51 @@
+name: MySchema
+description: MySchema
+id: https://w3id.org/MySchema
+imports:
+- linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  MySchema: https://w3id.org/MySchema
+default_prefix: MySchema
+enums:
+  sex_enum:
+    permissible_values:
+      male:
+        description: male
+      n/a:
+        description: n/a
+      female:
+        description: female
+  ploidy_enum:
+    permissible_values:
+      n/a:
+        description: n/a
+      disomic:
+        description: disomic
+      trisomic:
+        description: trisomic
+slots:
+  geo_accession:
+    examples:
+    - value: GSM2516206
+    identifier: true
+    range: string
+  sex:
+    examples:
+    - value: n/a
+    range: sex_enum
+  ploidy:
+    examples:
+    - value: disomic
+    range: ploidy_enum
+  cell_type:
+    examples:
+    - value: in vitro differentiated cells
+    range: string
+classes:
+  Observation:
+    slots:
+    - geo_accession
+    - sex
+    - ploidy
+    - cell_type
