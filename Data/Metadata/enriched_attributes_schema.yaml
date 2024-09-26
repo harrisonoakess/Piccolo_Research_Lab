@@ -1,0 +1,65 @@
+name: MySchema
+description: MySchema
+id: https://w3id.org/MySchema
+imports:
+- linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  MySchema: https://w3id.org/MySchema
+default_prefix: MySchema
+enums:
+  sex_enum:
+    from_schema: https://w3id.org/MySchema
+    permissible_values:
+      male:
+        description: male
+        exact_mappings:
+        - CHEBI:30780
+      n/a:
+        description: n/a
+      female:
+        description: female
+  ploidy_enum:
+    from_schema: https://w3id.org/MySchema
+    permissible_values:
+      n/a:
+        description: n/a
+      disomic:
+        description: disomic
+      trisomic:
+        description: trisomic
+slots:
+  geo_accession:
+    examples:
+    - value: GSM2516206
+    from_schema: https://w3id.org/MySchema
+    identifier: true
+    range: string
+  sex:
+    examples:
+    - value: n/a
+    from_schema: https://w3id.org/MySchema
+    exact_mappings:
+    - PATO:0001894
+    range: sex_enum
+  ploidy:
+    examples:
+    - value: disomic
+    from_schema: https://w3id.org/MySchema
+    range: ploidy_enum
+  cell_type:
+    examples:
+    - value: in vitro differentiated cells
+    from_schema: https://w3id.org/MySchema
+    exact_mappings:
+    - EFO:0000324
+    range: string
+classes:
+  Observation:
+    from_schema: https://w3id.org/MySchema
+    slots:
+    - geo_accession
+    - sex
+    - ploidy
+    - cell_type
+source_file: attributes_schema.yaml
