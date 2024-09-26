@@ -17,7 +17,7 @@ temp_file_location <- "Data/Metadata/temp_file_target_data.tsv"
 
 file_location <- "Data/Metadata/"
 
-target_attributes <- tibble (
+target_attributes <- tibble ( # create tibble to store target attributes
   geo_accession = character(), sex = character(), ploidy = character(), cell_type = character()
   
 )
@@ -27,17 +27,17 @@ target_attributes <- tibble (
 get_metadata <- function(series_ID, file_location) {
   metadata <- getGEO(series_ID)[[1]] # retrieves metadata using GEOquery function
   
-  metadata = as_tibble(pData(metadata))
+  metadata = as_tibble(pData(metadata)) # converts metadata to tibble
   # view(metadata)
   
   write_tsv(metadata, file_location) # writes metadata to a temporary file
 }
 
-append_tibble <- function(series_ID, temp_file_location, target_attributes) {
-  metadata <- read_tsv(temp_file_location)
+append_tibble <- function(series_ID, temp_file_location, target_attributes) { # fucniton that appends new rows from one file to target_attributes
+  metadata <- read_tsv(temp_file_location) # read temporary file
   metadata_tibble <- as_tibble(metadata)
 
-  for (i in 1:nrow(metadata_tibble)){
+  for (i in 1:nrow(metadata_tibble)){ # loop through all rows in metadata
     row = metadata_tibble[i, ]
     
     current_sex = "n/a"
@@ -45,32 +45,32 @@ append_tibble <- function(series_ID, temp_file_location, target_attributes) {
     current_cell_type = "n/a"
     ID = "n/a"
     
-    column_name <- names(metadata)[grepl("cell type", names(metadata)) |
+    column_name <- names(metadata)[grepl("cell type", names(metadata)) | # get column name for cell type
                                       grepl("cell_type", names(metadata))]
     # View(column_name)
-    if (length(column_name) != 0) {
-      current_cell_type = row[[column_name]]
+    if (length(column_name) != 0) { # if column name exists
+      current_cell_type = row[[column_name]] # current cell type is the value in that column
     }
     
-    column_name <- names(metadata)[grepl("geo", names(metadata))]
+    column_name <- names(metadata)[grepl("geo", names(metadata))] # get column name for ID
     # View(column_name)
-    if (length(column_name) != 0) {
-      ID = row[[column_name]]
+    if (length(column_name) != 0) { # if column name exists
+      ID = row[[column_name]] # current ID is the value in that column
     }
     
-    if (any(str_detect(row, regex("female", ignore_case = TRUE)), na.rm = TRUE)){
-      current_sex = "female"
+    if (any(str_detect(row, regex("female", ignore_case = TRUE)), na.rm = TRUE)){ # first check each cell in row for 'female' if found set current sex to female
+      current_sex = "female" 
     } else if (any(str_detect(row, regex("male", ignore_case = TRUE)), na.rm = TRUE)){
       current_sex = "male"
     }
     
-    if (any(str_detect(row, regex("trisomic | trisomy", ignore_case = TRUE)), na.rm = TRUE)){
+    if (any(str_detect(row, regex("trisomic | trisomy", ignore_case = TRUE)), na.rm = TRUE)){ # first check each cell in row for 'trisomic' if found set current ploidy to trisomic
       current_ploidy = "trisomic"
     } else if (any(str_detect(row, regex("disomic | disomy | WT | normal", ignore_case = TRUE)), na.rm = TRUE)){
       current_ploidy = "disomic"
     }
     
-    target_attributes <- add_row(target_attributes, geo_accession = ID , sex = current_sex, ploidy = current_ploidy, cell_type = current_cell_type)
+    target_attributes <- add_row(target_attributes, geo_accession = ID , sex = current_sex, ploidy = current_ploidy, cell_type = current_cell_type) # append to tiblle with row contained retrieved values
   }
   file.remove(temp_file_location) # remove temporary file
   return(target_attributes)
@@ -87,9 +87,9 @@ process_metadata <- function(series_ID, temp_file_location, target_attributes) {
 }
 
 #-----------------------script to run-------------------------------------------
-for (i in RNA_series_ID) { # loop through all series IDs
+for (i in RNA_series_ID) { # loop through all series IDs to crate one tibble with the target attributes data from all files
   target_attributes = process_metadata(i, temp_file_location, target_attributes)
 }
 view(target_attributes)
 
-# write_tsv(metadata_filtered, paste0(file_location, series_ID, "_metadata.tsv"))
+write_tsv(target_attributes, paste0(file_location, "_target_attributes.tsv"))
