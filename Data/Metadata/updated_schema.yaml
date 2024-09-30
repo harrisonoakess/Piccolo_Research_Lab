@@ -1,0 +1,105 @@
+name: MySchema
+description: MySchema
+id: https://w3id.org/MySchema
+imports: linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  MySchema: https://w3id.org/MySchema
+default_prefix: MySchema
+enums:
+  sex_enum:
+    from_schema: https://w3id.org/MySchema
+    permissible_values:
+      male:
+        description: male
+        exact_mappings: PATO:0000384
+      n/a:
+        description: n/a
+      female:
+        description: female
+        exact_mappings: PATO:0000383
+  ploidy_enum:
+    from_schema: https://w3id.org/MySchema
+    permissible_values:
+      n/a:
+        description: n/a
+      disomic:
+        description: disomic
+        exact_mappings: PATO:0001387
+      trisomic:
+        description: trisomic
+        exact_mappings: PATO:0001389
+  cell_type_enum:
+    from_schema: https://w3id.org/MySchema
+    permissible_values:
+      adipocyte:
+        description: adipocyte
+        exact_mappings: EFO:0000136
+      bone marrow cell:
+        description: bone marrow cell
+        exact_mappings: EFO:0002092
+      endothelial:
+        description: endothelial cell
+        exact_mappings: EFO:0000115
+      epithelial:
+        description: epithelial cell
+        exact_mappings: EFO:0000066
+      fibroblast:
+        description: fibroblast
+        exact_mappings: EFO:0000057
+      glial brain cell:
+        description: glial brain cell
+        exact_mappings: EFO:1001464
+      hematopoietic:
+        description: hematopoietic cell
+        exact_mappings: EFO:0000988
+      immortal cell line:
+        description: immortal cell line cell
+        exact_mappings: EFO:0000019
+      neoplastic:
+        description: neoplastic cell
+        exact_mappings: EFO:0001063
+      reproductive system:
+        description: reproductive system cell
+        exact_mappings: EFO:0002955
+      stem:
+        description: stem cell
+        exact_mappings: EFO:0000034
+      stromal:
+        description: stromal cell
+        exact_mappings: EFO:0000499
+slots:
+  geo_accession:
+    examples:
+    - value: GSM2516206
+    from_schema: https://w3id.org/MySchema
+    identifier: yes
+    range: string
+  sex:
+    examples:
+    - value: n/a
+    from_schema: https://w3id.org/MySchema
+    exact_mappings: PATO:0001894
+    range: sex_enum
+  ploidy:
+    examples:
+    - value: disomic
+    from_schema: https://w3id.org/MySchema
+    range: ploidy_enum
+    exact_mappings: PATO:0001374
+  cell_type:
+    examples:
+    - value: in vitro differentiated cells
+    from_schema: https://w3id.org/MySchema
+    exact_mappings: EFO:0000324
+    range: string
+classes:
+  Observation:
+    from_schema: https://w3id.org/MySchema
+    slots:
+    - geo_accession
+    - sex
+    - ploidy
+    - cell_type
+source_file: attributes_schema.yaml
+
