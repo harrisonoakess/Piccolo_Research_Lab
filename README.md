@@ -11,3 +11,8 @@ Our goal here is to pull the three types of infomration. The problem is that the
 ex. 
 
 ![image](https://github.com/user-attachments/assets/a3815c0c-abe6-48a2-b753-a2e178c003e2)
+
+### 9/26/24 notes ###
+
+- We want to get only EOF in the yaml file, but we may need to write a script to go thorugh line by line and replace anything that is not EOF (ex. PATO works, but we want to avoid using different libraries, CHEBI is innacurate and not what we want)
+- For cell type, we want to get the ontology reference in the column with the original data. This way there is a reference to the original collected data, while createing a standardized way to find data.
