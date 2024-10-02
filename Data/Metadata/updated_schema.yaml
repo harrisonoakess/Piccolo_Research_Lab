@@ -94,7 +94,7 @@ slots:
     exact_mappings: EFO:0000324
     range: string
 classes:
-  Observation:
+  Sample:
     from_schema: https://w3id.org/MySchema
     slots:
     - geo_accession

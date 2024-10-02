@@ -31,5 +31,6 @@ cell_type_enum <- list(
 )
 
 schema$enums$cell_type_enum <- cell_type_enum
-
 View(schema)
+
+writeLines(as.yaml(schema), "updated_schema.yaml")
