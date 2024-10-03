@@ -28,6 +28,6 @@ get_data <- function(series_ID) {
  get_data(new_series_ID)
 
 
-for (i in RNA_series_ID) { # loops through all RNA series IDs
+for (i in new_series_ID) { # loops through all RNA series IDs
   get_data(i)
 }
