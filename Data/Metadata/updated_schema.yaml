@@ -35,7 +35,7 @@ enums:
       adipocyte:
         description: adipocyte
         exact_mappings: EFO:0000136
-      bone marrow cell:
+      bone_marrow_cell:
         description: bone marrow cell
         exact_mappings: EFO:0002092
       endothelial:
@@ -47,19 +47,19 @@ enums:
       fibroblast:
         description: fibroblast
         exact_mappings: EFO:0000057
-      glial brain cell:
-        description: glial brain cell
+      glial_brain_cell:
+        description: glial_brain_cell
         exact_mappings: EFO:1001464
       hematopoietic:
         description: hematopoietic cell
         exact_mappings: EFO:0000988
-      immortal cell line:
+      immortal_cell_line:
         description: immortal cell line cell
         exact_mappings: EFO:0000019
       neoplastic:
-        description: neoplastic cell
+        description: neoplastic_cell
         exact_mappings: EFO:0001063
-      reproductive system:
+      reproductive_system:
         description: reproductive system cell
         exact_mappings: EFO:0002955
       stem:
