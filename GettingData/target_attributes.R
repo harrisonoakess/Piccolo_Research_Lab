@@ -5,8 +5,8 @@ library(GEOquery)
 
 
 #----------------------data-----------------------------------------------------
-# setwd("C:/Users/hoakes/Documents/Piccolo_Research_Lab")
-setwd("C:/Users/garrettwride/Piccolo_Research_Lab")
+setwd("C:/Users/hoakes/Documents/Piccolo_Research_Lab")
+# setwd("C:/Users/garrettwride/Piccolo_Research_Lab")
   
 # RNA_series_ID = c("GSE128621")
 
@@ -110,7 +110,7 @@ if (response == "r") {
   stop("Invalid response. Please type 'r' for RNA-seq or 'a' for Affymetrix.")
 }
 
-for (i in RNA_series_ID) { # loop through all series IDs to crate one tibble with the target attributes data from all files
+for (i in series_ID_list) { # loop through all series IDs to crate one tibble with the target attributes data from all files
   target_attributes = process_metadata(i, temp_file_location, target_attributes)
 }
 view(target_attributes)
