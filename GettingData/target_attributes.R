@@ -52,17 +52,23 @@ append_tibble <- function(series_ID, temp_file_location, target_attributes) { # 
   for (i in 1:nrow(metadata_tibble)){ # loop through all rows in metadata
     row = metadata_tibble[i, ]
     
-    current_sex = "n/a"
-    current_ploidy = "n/a"
-    current_cell_type = "n/a"
-    ID = "n/a"
+    current_sex = NA
+    current_ploidy = NA
+    current_cell_type = NA
+    ID = NA
     
     column_name <- names(metadata)[grepl("cell type", names(metadata)) | # get column name for cell type
                                       grepl("cell_type", names(metadata))]
+    if (length(column_name) == 0){
+      column_name <- names(metadata)[grepl("tissue", names(metadata))]
+    }
+    
+    
     # View(column_name)
     if (length(column_name) != 0) { # if column name exists
       current_cell_type = row[[column_name]] # current cell type is the value in that column
     }
+      
     
     column_name <- names(metadata)[grepl("geo", names(metadata))] # get column name for ID
     # View(column_name)
