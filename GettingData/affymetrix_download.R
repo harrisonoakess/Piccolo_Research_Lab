@@ -28,20 +28,22 @@ getGEOSuppFiles("GSE11877")
 untar("GSE11877/GSE11877_RAW.tar", exdir = "GSE11877_RAW")
 
 # List the extracted files
-list.files("//Data")
+list.files("GSE11877_RAW")
 
 # Read the first few lines of the CEL file
 readLines("GSE11877_RAW/GSM11877.CEL.gz", n = 1000)
 
 # Define the full path to your GSE11877_RAW directory
-gse_path <- "C:/Users/garrettwride/Piccolo_Research_Lab/GSE11877_RAW"
+gse_path <- "GSE11877_RAW"
 
 # List all the .CEL files in the directory
 cel_files <- list.files(path=gse_path, pattern="^[^.]*\\.CEL\\.gz$")
 
 print(cel_files)
 
-files_to_delete <- setdiff(extracted_files, cel_files)
+files_to_delete <- setdiff(list.files("GSE11877_RAW"), cel_files)
+
+print(files_to_delete)
 
 if (length(files_to_delete) > 0) {
   file.remove(files_to_delete)
