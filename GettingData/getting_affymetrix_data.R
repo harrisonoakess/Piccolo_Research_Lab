@@ -1,6 +1,7 @@
 #--------------------libraries--------------------
 library(GEOquery)
 library(affy)
+library(tidy)
 # if (!require("BiocManager", quietly = TRUE)) 
 #   install.packages("BiocManager")
 # BiocManager::install("SCAN.UPC")
@@ -30,9 +31,9 @@ untar("GSE11877/GSE11877_RAW.tar", exdir = "GSE11877_RAW")
 
 file.rename("GSE11877_RAW", "affymetrix_data/GSE11877_RAW")
 
-closeAllConnections()
-
-unlink("GSE11877", recursive = TRUE)
+# closeAllConnections()
+# 
+# unlink("GSE11877", recursive = TRUE)
 
 # # List the extracted files
 # list.files("GSE11877_RAW")
@@ -54,4 +55,11 @@ print(files_to_delete)
 
 if (length(files_to_delete) > 0) {
   file.remove(files_to_delete)
-  
+}
+cell_data = ReadAffy(filenames = gse_path)
+View(cell_data)
+
+# untar("affymetrix_data/GSE11877/GSM299862.CEL.gz", exdir = "affymetrix_data/GSE11877_unzipped")
+# lines <- readLines(gzfile("affymetrix_data/GSE11877_RAW/GSM299862.CEL.gz"))
+# line_tibble = as_tibble(lines)
+# View(line_tibble)
