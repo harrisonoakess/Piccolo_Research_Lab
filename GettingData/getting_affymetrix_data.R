@@ -1,7 +1,7 @@
 #--------------------libraries--------------------
 library(GEOquery)
 library(affy)
-library(tidy)
+library(tidyverse)
 # if (!require("BiocManager", quietly = TRUE)) 
 #   install.packages("BiocManager")
 # BiocManager::install("SCAN.UPC")
