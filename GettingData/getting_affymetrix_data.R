@@ -1,8 +1,16 @@
 #--------------------libraries--------------------
-# library(GEOquery)
+library(GEOquery)
+library(affy)
 # if (!require("BiocManager", quietly = TRUE)) 
 #   install.packages("BiocManager")
 # BiocManager::install("SCAN.UPC")
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# BiocManager::install("GEOquery")
+
+# getwd()
+
+# setwd("C:\\Users\\garrettwride\\Piccolo_Research_Lab")
 
 #--------------------data--------------------
 # tmpDir =  tempdir()
@@ -12,64 +20,35 @@
 
 
 #--------------------------------------------------
-# Install and load required libraries
-# if (!requireNamespace("BiocManager", quietly = TRUE))
-#   install.packages("BiocManager")
-# BiocManager::install("GEOquery")
-library(GEOquery)
 
-# Set the GSE accession number
-gse_accession <- "GSE11877"
+# Download supplementary files
+getGEOSuppFiles("GSE11877")
 
-# Download the supplementary files
-tryCatch({
-  gse <- getGEO(gse_accession, GSEMatrix = FALSE, getGPL = FALSE)
-  supfiles <- getGEOSuppFiles(gse_accession, fetch_files = FALSE)
-  print(supfiles)  # Print the supfiles data frame for inspection
-}, error = function(e) {
-  cat("Error in downloading supplementary files:", conditionMessage(e), "\n")
-  return(NULL)
-})
+dir.create("affymetrix_data", showWarnings = FALSE)
 
-if (is.null(supfiles) || nrow(supfiles) == 0) {
-  cat("No supplementary files found for", gse_accession, "\n")
-  quit(save = "no")
-}
+# Extract the tar file
+untar("GSE11877/GSE11877_RAW.tar", exdir = "GSE11877_RAW")
 
-# Filter for .cel.gz files
-cel_files <- supfiles[grep("\\.cel\\.gz$", rownames(supfiles), ignore.case = TRUE), ]
+file.rename("GSE11877_RAW", "affymetrix_data/GSE11877_RAW")
 
-if (nrow(cel_files) == 0) {
-  cat("No .cel.gz files found in the supplementary files.\n")
-  print(rownames(supfiles))  # Print all available file names
-  quit(save = "no")
-}
+# List the extracted files
+list.files("GSE11877_RAW")
 
-# Create a directory to store the downloaded files
-dir.create("GSE11877_cel_files", showWarnings = FALSE)
+# Read the first few lines of the CEL file
+readLines("GSE11877_RAW/GSM11877.CEL.gz", n = 1000)
 
-# Download and extract .cel.gz files
-for (file in rownames(cel_files)) {
-  file_url <- as.character(cel_files[file, "url"])
-  file_name <- basename(file_url)
-  
-  cat("Attempting to download:", file_name, "\n")
-  
-  tryCatch({
-    download.file(file_url, destfile = file.path("GSE11877_cel_files", file_name), mode = "wb")
-    cat("Successfully downloaded:", file_name, "\n")
-  }, error = function(e) {
-    cat("Error downloading", file_name, ":", conditionMessage(e), "\n")
-  })
-}
+# Define the full path to your GSE11877_RAW directory
+gse_path <- "affymetrix_data/GSE11877_RAW"
 
-# Check the contents of the directory
-downloaded_files <- list.files("GSE11877_cel_files")
-cat("Files in GSE11877_cel_files directory:\n")
-print(downloaded_files)
+# List all the .CEL files in the directory
+cel_files <- list.files(path=gse_path, pattern="^[^.]*\\.CEL\\.gz$")
 
-if (length(downloaded_files) == 0) {
-  cat("No files were downloaded. Please check the console output for error messages.\n")
-} else {
-  cat("Downloaded", length(downloaded_files), "files to the 'GSE11877_cel_files' directory.\n")
-}
+print(cel_files)
+
+files_to_delete <- setdiff(list.files("GSE11877_RAW"), cel_files)
+
+print(files_to_delete)
+
+# if (length(files_to_delete) > 0) {
+#   file.remove(files_to_delete)
+# }
