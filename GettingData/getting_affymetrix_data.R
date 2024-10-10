@@ -20,22 +20,24 @@ library(affy)
 
 
 #--------------------------------------------------
+dir.create("affymetrix_data", showWarnings = FALSE)
 
 # Download supplementary files
 getGEOSuppFiles("GSE11877")
 
-dir.create("affymetrix_data", showWarnings = FALSE)
 
 # Extract the tar file
 untar("GSE11877/GSE11877_RAW.tar", exdir = "GSE11877_RAW")
 
 file.rename("GSE11877_RAW", "affymetrix_data/GSE11877_RAW")
 
-# List the extracted files
-list.files("GSE11877_RAW")
+unlink("GSE11877", recursive = TRUE)
 
-# Read the first few lines of the CEL file
-readLines("GSE11877_RAW/GSM11877.CEL.gz", n = 1000)
+# # List the extracted files
+# list.files("GSE11877_RAW")
+# 
+# # Read the first few lines of the CEL file
+# readLines("GSE11877_RAW/GSM11877.CEL.gz", n = 1000)
 
 # Define the full path to your GSE11877_RAW directory
 gse_path <- "affymetrix_data/GSE11877_RAW"

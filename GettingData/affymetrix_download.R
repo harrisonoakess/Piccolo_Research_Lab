@@ -34,14 +34,14 @@ list.files("GSE11877_RAW")
 readLines("GSE11877_RAW/GSM11877.CEL.gz", n = 1000)
 
 # Define the full path to your GSE11877_RAW directory
-gse_path <- "GSE11877_RAW"
+gse_path <- "affymetrix_data/GSE11877_RAW"
 
 # List all the .CEL files in the directory
 cel_files <- list.files(path=gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE)
 
 print(cel_files)
 
-files_to_delete <- setdiff(list.files("GSE11877_RAW", full.names= TRUE), cel_files)
+files_to_delete <- setdiff(list.files(gse_path, full.names= TRUE), cel_files)
 
 print(files_to_delete)
 
