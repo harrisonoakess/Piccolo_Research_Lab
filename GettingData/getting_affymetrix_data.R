@@ -25,11 +25,12 @@ dir.create("affymetrix_data", showWarnings = FALSE)
 # Download supplementary files
 getGEOSuppFiles("GSE11877")
 
-
 # Extract the tar file
 untar("GSE11877/GSE11877_RAW.tar", exdir = "GSE11877_RAW")
 
 file.rename("GSE11877_RAW", "affymetrix_data/GSE11877_RAW")
+
+closeAllConnections()
 
 unlink("GSE11877", recursive = TRUE)
 
@@ -43,14 +44,14 @@ unlink("GSE11877", recursive = TRUE)
 gse_path <- "affymetrix_data/GSE11877_RAW"
 
 # List all the .CEL files in the directory
-cel_files <- list.files(path=gse_path, pattern="^[^.]*\\.CEL\\.gz$")
+cel_files <- list.files(path=gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE)
 
 print(cel_files)
 
-files_to_delete <- setdiff(list.files("GSE11877_RAW"), cel_files)
+files_to_delete <- setdiff(list.files(gse_path, full.names= TRUE), cel_files)
 
 print(files_to_delete)
 
-# if (length(files_to_delete) > 0) {
-#   file.remove(files_to_delete)
-# }
+if (length(files_to_delete) > 0) {
+  file.remove(files_to_delete)
+  
