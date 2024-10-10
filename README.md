@@ -30,3 +30,18 @@ ex.
 - when you run scan there is a setting maybe convergence default is .01 change to 1 and it will process faster
 - processing the meta data for other types of data could fill the time while waiting for large data sets to process
 - after we process the meta data lets figure out how we will expand it to other meta data variables
+
+  ### 10/10/24 notes ###
+
+  ## Questions ##
+  - What is the best way to oragnized downloaded files without having to commit everything to github?
+  - ask about the order of the download/zip and why its not deleting (probably because the file is running in the background)
+  - What is the best way to read in the CEL files, at what point do we use the SCAN.UPC package
+  - 
+ 
+
+
+
+
+
+
