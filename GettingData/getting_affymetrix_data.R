@@ -1,6 +1,6 @@
 #--------------------libraries--------------------
 library(GEOquery)
-library(affy)
+library(BiocManager)
 library(tidy)
 # if (!require("BiocManager", quietly = TRUE)) 
 #   install.packages("BiocManager")
@@ -45,7 +45,7 @@ file.rename("GSE11877_RAW", "affymetrix_data/GSE11877_RAW")
 gse_path <- "affymetrix_data/GSE11877_RAW"
 
 # List all the .CEL files in the directory
-cel_files <- list.files(path=gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE)
+cel_files <- list.files(path=gse_path, pattern="?i^[^.]*\\.CEL\\.gz$", full.names= TRUE)
 
 print(cel_files)
 
@@ -56,8 +56,11 @@ print(files_to_delete)
 if (length(files_to_delete) > 0) {
   file.remove(files_to_delete)
 }
-cell_data = ReadAffy(filenames = gse_path)
-View(cell_data)
+
+celFilePattern <- file.path(gse_path, "*.CEL.gz")
+
+SCANfast(celFilePattern, outFilePath = "GSE11877/merged_data", convThreshold = 1, probeLevelOutDirPath = NA)
+
 
 # untar("affymetrix_data/GSE11877/GSM299862.CEL.gz", exdir = "affymetrix_data/GSE11877_unzipped")
 # lines <- readLines(gzfile("affymetrix_data/GSE11877_RAW/GSM299862.CEL.gz"))
