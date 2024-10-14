@@ -52,7 +52,7 @@ get_scan_upc_files = function(geo_id){
   gse_path <- tar_file_output_f
   
   # List all the .CEL files in the directory
-  cel_files <- list.files(path=gse_path, pattern="?i^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+  cel_files <- list.files(path = gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
   # Make a list of the first 10 files
   cel_files = c(cel_files[1:10])
@@ -79,57 +79,57 @@ get_scan_upc_files = function(geo_id){
   
 
 #-------------------Script-------------------------
-geo_id = "GSE11877"
-
-dir.create("affymetrix_data", showWarnings = FALSE)
-
-# for (file in geofiles){
-#   get_scan_upc_files(file)
+# geo_id = "GSE11877"
+# 
+# dir.create("affymetrix_data", showWarnings = FALSE)
+# 
+for (file in geofiles){
+  get_scan_upc_files(file)
+}
+# 
+# if (!file.exists(geo_id)){
+#   # Download supplementary files
+#   getGEOSuppFiles(geo_id)
+#   print("Download Successful")
 # }
-
-if (!file.exists(geo_id)){
-  # Download supplementary files
-  getGEOSuppFiles(geo_id)
-  print("Download Successful")
-}
-
-# formated string for the untar
-tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
-
-# formated string for the untar output
-tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-
-# Extract the tar file
-untar(tar_file_f, exdir = tar_file_output_f)
-print("Unzip Successfull")
-
-# Deletes the file with the zipped files
-unlink(geo_id, recursive = TRUE)
-
-# Define the full path to your GSE11877_RAW directory
-gse_path <- tar_file_output_f
-
-# List all the .CEL files in the directory
-cel_files <- list.files(path = gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-
-# Make a list of the first 10 files
-cel_files = c(cel_files[1:10])
-
-# Makes a list of all files that are not in the above cel_files vector
-files_to_delete <- setdiff(list.files(gse_path, full.names= TRUE), cel_files)
-
-# print(files_to_delete)
-
-# Deletes all files in the files_to_delete
-if (length(files_to_delete) > 0) {
-  file.remove(files_to_delete)
-}
-
-# Sets the file pattern to .CEL, so scan pulls everythiing with that ending
-celFilePattern <- file.path(gse_path, "*.CEL.gz")
-
-# formated string for the SCAN output
-scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
-
-# last step to converting the information
-SCANfast(celFilePattern, outFilePath = scan_output_file_f, convThreshold = .9, probeLevelOutDirPath = NA)
+# 
+# # formated string for the untar
+# tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
+# 
+# # formated string for the untar output
+# tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+# 
+# # Extract the tar file
+# untar(tar_file_f, exdir = tar_file_output_f)
+# print("Unzip Successfull")
+# 
+# # Deletes the file with the zipped files
+# unlink(geo_id, recursive = TRUE)
+# 
+# # Define the full path to your GSE11877_RAW directory
+# gse_path <- tar_file_output_f
+# 
+# # List all the .CEL files in the directory
+# cel_files <- list.files(path = gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+# 
+# # Make a list of the first 10 files
+# cel_files = c(cel_files[1:10])
+# 
+# # Makes a list of all files that are not in the above cel_files vector
+# files_to_delete <- setdiff(list.files(gse_path, full.names= TRUE), cel_files)
+# 
+# # print(files_to_delete)
+# 
+# # Deletes all files in the files_to_delete
+# if (length(files_to_delete) > 0) {
+#   file.remove(files_to_delete)
+# }
+# 
+# # Sets the file pattern to .CEL, so scan pulls everythiing with that ending
+# celFilePattern <- file.path(gse_path, "*.CEL.gz")
+# 
+# # formated string for the SCAN output
+# scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
+# 
+# # last step to converting the information
+# SCANfast(celFilePattern, outFilePath = scan_output_file_f, convThreshold = .9, probeLevelOutDirPath = NA)
