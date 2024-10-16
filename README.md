@@ -17,7 +17,7 @@ ex.
 - We want to get only EOF in the yaml file, but we may need to write a script to go thorugh line by line and replace anything that is not EOF (ex. PATO works, but we want to avoid using different libraries, CHEBI is innacurate and not what we want)
 - For cell type, we want to get the ontology reference in the column with the original data. This way there is a reference to the original collected data, while createing a standardized way to find data.
 
-### 10/3/24 notes ###
+## 10/3/24 notes ##
 - Entrez
 - GSE110064
 - GSE11877
@@ -31,9 +31,9 @@ ex.
 - processing the meta data for other types of data could fill the time while waiting for large data sets to process
 - after we process the meta data lets figure out how we will expand it to other meta data variables
 
-  ### 10/10/24 notes ###
+  ## 10/10/24 notes ##
 
-  ## Questions ##
+  ### Questions ###
   - What is the best way to oragnized downloaded files without having to commit everything to github?
   - ask about the order of the download/zip and why its not deleting (probably because the file is running in the background)
   - What is the best way to read in the CEL files, at what point do we use the SCAN.UPC package
