@@ -7,6 +7,7 @@ library(tidyverse)
 library(BiocManager)
 library(tidyverse)
 library(SCAN.UPC) 
+library(lubridate)
 
 # if (!require("BiocManager", quietly = TRUE)) 
 #   install.packages("BiocManager")
@@ -16,9 +17,9 @@ library(SCAN.UPC)
 # BiocManager::install("GEOquery")
 
 #--------------------data--------------------
-# geofiles = c("GSE11877")
+geofiles = c("GSE143885")
 
-geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
+# geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
 
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE1397", "GSE143885", "GSE149459", "GSE149460",
 # "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
@@ -82,10 +83,19 @@ get_scan_upc_files = function(geo_id){
   scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
   
   # last step to converting the information
-  SCAN(celFilePattern, outFilePath = scan_output_file_f, convThreshold = .9, probeLevelOutDirPath = NA)
+  SCAN(celFilePattern, outFilePath = scan_output_file_f, convThreshold = .01, probeLevelOutDirPath = NA)
   
   # Delete the RAW file
   unlink(tar_file_output_f, recursive = TRUE)
+}
+
+format_time_diff <- function(time_diff) {
+  hours <- floor(as.numeric(time_diff, units="hours"))
+  minutes <- floor(as.numeric(time_diff, units="mins") %% 60)
+  seconds <- floor(as.numeric(time_diff, units="secs") %% 60)
+  milliseconds <- round((as.numeric(time_diff, units="secs") %% 1) * 1000)
+  
+  sprintf("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
 }
 
 #-------------------Script-------------------------
@@ -94,8 +104,8 @@ for (file in geofiles){
   get_scan_upc_files(file)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
-  print(paste('File download time: ', total_file_time))
+  print(paste('File download time: ', format_time_diff(total_file_time)))
 }
 total_end_time = Sys.time()
 total_time = total_end_time - total_start_time
-print(paste('Total time: ', total_time))
+print(paste('Total time: ', format_time_diff(total_time)))
