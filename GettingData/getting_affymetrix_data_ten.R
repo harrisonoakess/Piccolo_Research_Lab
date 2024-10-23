@@ -1,6 +1,9 @@
 total_start_time = Sys.time()
 options(timeout = max(300, getOption("timeout")))
 #--------------------libraries--------------------
+
+
+
 library(GEOquery)
 library(affy)
 library(tidyverse)
@@ -57,17 +60,14 @@ get_scan_upc_files = function(geo_id){
   # Deletes the file with the zipped files
   unlink(geo_id, recursive = TRUE)
   
-  # Define the full path to your GSE11877_RAW directory
-  gse_path <- tar_file_output_f
-  
   # List all the .CEL files in the directory
-  cel_files <- list.files(path = gse_path, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+  cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
   # Make a list of the first 10 files
   cel_files = c(cel_files[1:10])
   
   # Makes a list of all files that are not in the above cel_files vector
-  files_to_delete <- setdiff(list.files(gse_path, full.names= TRUE), cel_files)
+  files_to_delete <- setdiff(list.files(tar_file_output_f, full.names= TRUE), cel_files)
   
   # print(files_to_delete)
   
@@ -77,13 +77,16 @@ get_scan_upc_files = function(geo_id){
   }
   
   # Sets the file pattern to .CEL, so scan pulls everythiing with that ending
-  celFilePattern <- file.path(gse_path, "*.CEL.gz")
+  celFilePattern <- file.path(tar_file_output_f, "*.CEL.gz")
   
   # formated string for the SCAN output
   scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
   
+  pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
+  
   # last step to converting the information
-  SCAN(celFilePattern, outFilePath = scan_output_file_f, convThreshold = .01, probeLevelOutDirPath = NA)
+  normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
+  View(normalized)
   
   # Delete the RAW file
   unlink(tar_file_output_f, recursive = TRUE)
