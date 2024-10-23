@@ -37,9 +37,33 @@ ex.
   - What is the best way to oragnized downloaded files without having to commit everything to github?
   - ask about the order of the download/zip and why its not deleting (probably because the file is running in the background)
   - What is the best way to read in the CEL files, at what point do we use the SCAN.UPC package
-  - 
  
+## 10/17/24 notes ##
+- make it so the libraries do not donwload everytime
+- after we load the libraries, we want to donwload the smallest dataset representing each unique platform that is found in each dataset, then install brain array package for each of those, then save the package name into a list for each of those.
+- Make a conditional to check what kind of platform it is, then run scan with a specific probsummarypackage.
+- finish writing the script so normalized is saved as a file, use expr() to get a matrix from normalized, then we can edit column names, and the row names. We want to remove everything after the GSE ID. Then from there we can save it into a TSV.
+- Then use Bioconductor quality control library, which rates the quality of the files, then we can have a tsv of each file, and what the quality is. This would be put into the code before SCAN.
+- Use the google sheets from Dr. Piccolo to figure out what files are good and which ones are bad and to figure out the different platforms (see above)
+- Docker container... good luck
 
+ Unique platforms and smallest dataset:
+Affymetrix GeneChip Human Genome U133A 2.0 [HG-U133A_2]
+[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)
+[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)
+[MG_U74Bv2] Affymetrix Murine Genome U74B Version 2 Array (GPL82)
+[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)
+[HG-U133A] Affymetrix Human Genome U133A Array (GPL96)
+[MoGene-1_0-st] Affymetrix Mouse Gene 1.0 ST Array [transcript (gene) version] (GPL6246)
+[MoGene-1_0-st] Affymetrix Mouse Gene 1.0 ST Array [CDF: MoGene10stv1_Mm_ENTREZG_14.1.0] (GPL13730)
+[HTA-2_0] Affymetrix Human Transcriptome Array 2.0 [transcript (gene) version] (GPL17586)
+[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)
+[Clariom_S_Mouse_HT] Affymetrix Clariom S Assay HT, Mouse (Includes Pico Assay) (GPL24242)
+[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)
+[HuEx-1_0-st] Affymetrix Human Exon 1.0 ST Array [transcript (gene) version] (GPL5175)
+[PrimeView] Affymetrix Human Gene Expression Array (GPL15207)
+[HuGene-2_0-st] Affymetrix Human Gene 2.0 ST Array [HuGene20stv1_Hs_ENTREZG_17.0.0] (GPL17930)
+GSE65055
 
 
 
