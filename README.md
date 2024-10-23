@@ -63,9 +63,19 @@ Affymetrix GeneChip Human Genome U133A 2.0 [HG-U133A_2]
 [HuEx-1_0-st] Affymetrix Human Exon 1.0 ST Array [transcript (gene) version] (GPL5175)
 [PrimeView] Affymetrix Human Gene Expression Array (GPL15207)
 [HuGene-2_0-st] Affymetrix Human Gene 2.0 ST Array [HuGene20stv1_Hs_ENTREZG_17.0.0] (GPL17930)
+
+GSE143885
+GSE1282
+GSE1281
+GSE19681
 GSE65055
-
-
-
-
+GSE47014
+GSE35665
+GSE36787
+GSE222355
+GSE16676
+GSE168111
+GSE158376
+GSE39159
+GSE5390
 
