@@ -1,5 +1,3 @@
-total_start_time = Sys.time()
-options(timeout = max(300, getOption("timeout")))
 #--------------------libraries--------------------
 library(GEOquery)
 library(affy)
@@ -88,8 +86,7 @@ platform_list <- list(
   "GSE99135"=	"[Mogène -10_st ]	AFFYMETRIX	MOUSE	gene	array"
 )
 
-print(platform_list$"GSE99135")
-
+# print(platform_list$"GSE99135")
 
 #------------unique gse_platforms-----------------
 # target_geo_ids <- c(
@@ -119,7 +116,7 @@ target_geo_ids <- c(
   "GSE168111",
   "GSE30517"
 )
-#------------------functions----------------------
+#--------------------functions--------------------
 
 get_brain_array_packages <- function(target_geo_ids, platform_list){
   platform_to_package_list = list()
@@ -131,9 +128,9 @@ get_brain_array_packages <- function(target_geo_ids, platform_list){
     cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
     
     pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
-    # print(pkgName)
+    print(pkgName)
     useable_platform = platform_list[[geo_id]]
-    # print(platform_to_package_list)
+    print(platform_to_package_list)
     
     platform_to_package_list[[useable_platform]] = pkgName #######################################
   }
@@ -184,65 +181,6 @@ untar_and_delete <- function(geo_id) {
     file.remove(files_to_delete)
   }
 }
-
-get_scan_upc_files <- function(geo_id, platform_to_package_list){ ################################## 
-  # formated string for the untar
-  tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
-  
-  # formated string for the untar output
-  tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-  
-  if (!file.exists(tar_file_output_f)){
-    untar_and_delete(geo_id)
-    print('untar successful')
-  }
-  
-  # Sets the file pattern to .CEL, so scan pulls everything with that ending
-  celFilePattern <- file.path(tar_file_output_f, "*.CEL.gz")
-  
-  # formated string for the SCAN output
-  scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
-  print('test')
-  
-  # List all the .CEL files in the directory
-  cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-  
-  # Make a list of the first 10 files
-  cel_files = c(cel_files[1:10])
-  
-  # pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
-  # print(pkgName)
-  
-  pkgName = platform_to_package_list$geo_id ###############################################
-  
-  print('test2')  
-  # last step to converting the information
-  normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
-  View(normalized)
-  
-  # Delete the RAW file
-  unlink(tar_file_output_f, recursive = TRUE)
-}
-
-format_time_diff <- function(time_diff) {
-  hours <- floor(as.numeric(time_diff, units="hours"))
-  minutes <- floor(as.numeric(time_diff, units="mins") %% 60)
-  seconds <- floor(as.numeric(time_diff, units="secs") %% 60)
-  milliseconds <- round((as.numeric(time_diff, units="secs") %% 1) * 1000)
-  
-  sprintf("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
-}
-
-#-------------------Script-------------------------
-platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list) ##########################################
+#--------------script-----------
+platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list)
 print(platform_to_package_list)
-for (geo_id in geofiles){
-  file_start_time = Sys.time()
-  get_scan_upc_files(geo_id, platform_to_package_list)
-  file_end_time = Sys.time()
-  total_file_time = file_end_time - file_start_time
-  print(paste('File download time: ', format_time_diff(total_file_time)))
-}
-total_end_time = Sys.time()
-total_time = total_end_time - total_start_time
-print(paste('Total time: ', format_time_diff(total_time)))
