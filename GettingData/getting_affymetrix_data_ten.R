@@ -110,15 +110,24 @@ print(platform_list$"GSE99135")
 # )
 
 target_geo_ids <- c(
-  "GSE143885", 
-  "GSE19681", 
-  "GSE65055", 
-  "GSE47014", 
-  "GSE35665", 
-  "GSE36787", 
+  "GSE143885",
+  "GSE19681",
+  "GSE65055",
+  "GSE47014",
+  "GSE35665",
+  "GSE36787",
   "GSE168111",
   "GSE30517"
 )
+
+# target_geo_ids <- c("GSE1282", 
+#                     "GSE1281", 
+#                     "GSE222355", 
+#                     "GSE16676", 
+#                     "GSE158376", 
+#                     "GSE39159"
+# )
+
 #------------------functions----------------------
 
 get_brain_array_packages <- function(target_geo_ids, platform_list){
@@ -208,17 +217,19 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){ ##############
   cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
   # Make a list of the first 10 files
-  cel_files = c(cel_files[1:10])
+  # cel_files = c(cel_files[1:10])
   
   # pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
   # print(pkgName)
   
   pkgName = platform_to_package_list$geo_id ###############################################
   
-  print('test2')  
+  print('test2') 
+  print(pkgName)
   # last step to converting the information
   normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
-  View(normalized)
+  
+  print('test3')
   
   # Delete the RAW file
   unlink(tar_file_output_f, recursive = TRUE)
