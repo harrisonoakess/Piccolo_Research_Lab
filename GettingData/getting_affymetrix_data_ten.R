@@ -256,12 +256,31 @@ format_time_diff <- function(time_diff) {
   sprintf("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
 }
 
+save_normalized_file <- function(geo_id, normalized){
+  normalized_tibble = as_tibble(normalized)
+  normalized_tibble = normalized_tibble %>%
+  rename_with(
+    ~str_extract(., "\\d+"),
+    everything()
+  )
+
+  test_dataframe = as.data.frame(normalized)
+  normalized_row_names = c(rownames(test_dataframe))
+  new_names = str_extract(normalized_row_names, "GSM\\d+")
+
+  final_tibble = normalized_tibble %>%
+    add_column("Sample_ID" = new_names, .before = 1)
+  tibble_file_location = paste0("Data/Affymetrix/", geo_id, ".tsv.gz")
+  write_tsv(final_tibble, tibble_file_location)
+}
+
 #-------------------Script-------------------------
 platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list) ##########################################
 print(platform_to_package_list)
 for (geo_id in geofiles){
   file_start_time = Sys.time()
   normalized = get_scan_upc_files(geo_id, platform_to_package_list)
+  save_normalized_file(geo_id, normalized)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
   print(paste('File download time: ', format_time_diff(total_file_time)))
@@ -270,9 +289,3 @@ total_end_time = Sys.time()
 total_time = total_end_time - total_start_time
 print(paste('Total time: ', format_time_diff(total_time)))
 
-
-
-
-
-normalized_tibble = as.tibble(normalized)
-view(normalized)
