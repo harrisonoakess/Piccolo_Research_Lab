@@ -92,7 +92,7 @@ print(platform_list$"GSE99135")
 
 
 #------------unique gse_platforms-----------------
-# target_geo_ids <- c(
+# target_geo_ids <- c( # combined list of Human and Mouse GSE's
 #   "GSE143885", 
 #   "GSE1282", 
 #   "GSE1281", 
@@ -109,7 +109,7 @@ print(platform_list$"GSE99135")
 #   "GSE5390"
 # )
 
-target_geo_ids <- c(
+target_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE143885",
   "GSE19681",
   "GSE65055",
@@ -120,7 +120,7 @@ target_geo_ids <- c(
   "GSE30517"
 )
 
-# target_geo_ids <- c("GSE1282", 
+# target_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mu)
 #                     "GSE1281", 
 #                     "GSE222355", 
 #                     "GSE16676", 
@@ -130,7 +130,7 @@ target_geo_ids <- c(
 
 #------------------functions----------------------
 
-clean_normalized <- function(normalized){
+clean_normalized <- function(normalized){ # I dont think this is needed
   normalized_tibble = as.tibble(normal)
 }
 
@@ -231,8 +231,7 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){ ##############
   platform = platform_list[[geo_id]]
   # print(platform_list)
   # print(platform)
-  pkgName = platform_to_package_list[[platform]] ###############################################
-  
+  pkgName = platform_to_package_list[[platform]]
   # print('test2') 
   # print(pkgName)
   # last step to converting the information
@@ -275,7 +274,7 @@ save_normalized_file <- function(geo_id, normalized){
 }
 
 #-------------------Script-------------------------
-platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list) ##########################################
+platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list)
 print(platform_to_package_list)
 for (geo_id in geofiles){
   file_start_time = Sys.time()
