@@ -130,6 +130,10 @@ target_geo_ids <- c(
 
 #------------------functions----------------------
 
+clean_normalized <- function(normalized){
+  normalized_tibble = as.tibble(normal)
+}
+
 get_brain_array_packages <- function(target_geo_ids, platform_list){
   platform_to_package_list = list()
   for (geo_id in target_geo_ids){
@@ -211,7 +215,7 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){ ##############
   
   # formated string for the SCAN output
   scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
-  print('test')
+  # print('test')
   
   # List all the .CEL files in the directory
   cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
@@ -222,17 +226,25 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){ ##############
   # pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
   # print(pkgName)
   
-  pkgName = platform_to_package_list$geo_id ###############################################
+  # print(platform_to_package_list)
   
-  print('test2') 
-  print(pkgName)
+  platform = platform_list[[geo_id]]
+  # print(platform_list)
+  # print(platform)
+  pkgName = platform_to_package_list[[platform]] ###############################################
+  
+  # print('test2') 
+  # print(pkgName)
   # last step to converting the information
   normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
-  
-  print('test3')
+  # clean_normalized(normalized)
+  # View(normalized)
+  # print('test3')
   
   # Delete the RAW file
   unlink(tar_file_output_f, recursive = TRUE)
+  return (normalized)
+  
 }
 
 format_time_diff <- function(time_diff) {
@@ -249,7 +261,7 @@ platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_lis
 print(platform_to_package_list)
 for (geo_id in geofiles){
   file_start_time = Sys.time()
-  get_scan_upc_files(geo_id, platform_to_package_list)
+  normalized = get_scan_upc_files(geo_id, platform_to_package_list)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
   print(paste('File download time: ', format_time_diff(total_file_time)))
@@ -257,3 +269,10 @@ for (geo_id in geofiles){
 total_end_time = Sys.time()
 total_time = total_end_time - total_start_time
 print(paste('Total time: ', format_time_diff(total_time)))
+
+
+
+
+
+normalized_tibble = as.tibble(normalized)
+view(normalized)
