@@ -39,7 +39,7 @@ ex.
   - What is the best way to read in the CEL files, at what point do we use the SCAN.UPC package
  
 ## 10/17/24 notes ##
-- make it so the libraries do not donwload everytime
+- make it so the libraries do not donwload everytime U+2705
 - after we load the libraries, we want to donwload the smallest dataset representing each unique platform that is found in each dataset, then install brain array package for each of those, then save the package name into a list for each of those.
 - Make a conditional to check what kind of platform it is, then run scan with a specific probsummarypackage.
 - finish writing the script so normalized is saved as a file, use expr() to get a matrix from normalized, then we can edit column names, and the row names. We want to remove everything after the GSE ID. Then from there we can save it into a TSV.
