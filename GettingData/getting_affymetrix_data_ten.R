@@ -135,22 +135,35 @@ clean_normalized <- function(normalized){ # I dont think this is needed
 }
 
 get_brain_array_packages <- function(target_geo_ids, platform_list){
-  platform_to_package_list = list()
-  for (geo_id in target_geo_ids){
-    untar_and_delete(geo_id)
-    # formatted string for the untar output
-    tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-    # List all the .CEL files in the directory
-    cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-    
-    pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
-    # print(pkgName)
-    useable_platform = platform_list[[geo_id]]
-    # print(platform_to_package_list)
-    
-    platform_to_package_list[[useable_platform]] = pkgName #######################################
+  if (!file.exists("Data/BrainArrayPackage")){
+    platform_to_package_list = list()
+    for (geo_id in target_geo_ids){
+      untar_and_delete(geo_id)
+      # formatted string for the untar output
+      tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+      # List all the .CEL files in the directory
+      cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+      
+      pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
+      # print(pkgName)
+      useable_platform = platform_list[[geo_id]]
+      # print(platform_to_package_list)
+      
+      platform_to_package_list[[useable_platform]] = pkgName
+    }
+    unlink("affymetrix_data", recursive = TRUE)
+    dir.create("Data/BrainArrayPackage")
+    platform_to_package_list_tibble = tibble(name = names(platform_to_package_list), value = unlist(platform_to_package_list))
+    write_tsv(platform_to_package_list_tibble, "Data/BrainArrayPackage/platform_to_package_list", quote = "all")
+    return(platform_to_package_list)
   }
-  return(platform_to_package_list) ###############################
+  else{
+    print("test")
+    platform_to_package_tibble_from_tsv = read_tsv("Data/BrainArrayPackage/platform_to_package_list", 
+                                                   col_types = cols(.default = col_character()), quote = "\"")
+    platform_to_package_list_from_tsv = setNames(as.list(platform_to_package_tibble_from_tsv$value), platform_to_package_tibble_from_tsv$name)
+    return (platform_to_package_list_from_tsv)
+  }
 }
 
 untar_and_delete <- function(geo_id) {
@@ -198,7 +211,7 @@ untar_and_delete <- function(geo_id) {
   }
 }
 
-get_scan_upc_files <- function(geo_id, platform_to_package_list){ ################################## 
+get_scan_upc_files <- function(geo_id, platform_to_package_list){
   # formated string for the untar
   tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
   
@@ -221,7 +234,7 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){ ##############
   cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
   # Make a list of the first 10 files
-  # cel_files = c(cel_files[1:10])
+  cel_files = c(cel_files[1:10])
   
   # pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
   # print(pkgName)
@@ -280,6 +293,7 @@ for (geo_id in geofiles){
   file_start_time = Sys.time()
   normalized = get_scan_upc_files(geo_id, platform_to_package_list)
   save_normalized_file(geo_id, normalized)
+  unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
   print(paste('File download time: ', format_time_diff(total_file_time)))
@@ -288,3 +302,10 @@ total_end_time = Sys.time()
 total_time = total_end_time - total_start_time
 print(paste('Total time: ', format_time_diff(total_time)))
 
+# readable_file = read_tsv("Data/Affymetrix/GSE143885.tsv")
+# view(readable_file)
+# plot(readable_file)
+# print(pkgName)
+# print(type(pkgName))
+
+print(get_brain_array_packages(target_geo_ids, platform_list))
