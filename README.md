@@ -43,7 +43,7 @@ ex.
 - after we load the libraries, we want to donwload the smallest dataset representing each unique platform that is found in each dataset, then install brain array package for each of those, then save the package name into a list for each of those. ✅
 - Make a conditional to check what kind of platform it is, then run scan with a specific probsummarypackage. ✅
 - finish writing the script so normalized is saved as a file, use expr() to get a matrix from normalized, then we can edit column names, and the row names. We want to remove everything after the GSE ID. Then from there we can save it into a TSV. ✅
-- Then use Bioconductor quality control library, which rates the quality of the files, then we can have a tsv of each file, and what the quality is. This would be put into the code before SCAN.
+- Then use Bioconductor quality control library, which rates the quality of the files, then we can have a tsv of each file, and what the quality is. This would be put into the code before SCAN. arrayQualityMetrics
 - Use the google sheets from Dr. Piccolo to figure out what files are good and which ones are bad and to figure out the different platforms (see above)
 - Docker container... good luck
 
@@ -79,3 +79,6 @@ GSE158376
 GSE39159
 GSE5390
 
+
+
+arrayQualityMetrics
