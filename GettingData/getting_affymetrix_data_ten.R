@@ -8,13 +8,20 @@ library(BiocManager)
 library(tidyverse)
 library(SCAN.UPC) 
 library(lubridate)
+library(arrayQualityMetrics)
+
 
 # if (!require("BiocManager", quietly = TRUE)) 
-#   install.packages("BiocManager")
+  install.packages("arrayQualityMetrics")
 # BiocManager::install("SCAN.UPC")
 # if (!requireNamespace("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 # BiocManager::install("GEOquery")
+  # if (!require("BiocManager", quietly = TRUE))
+  #   install.packages("BiocManager")
+  BiocManager::install("clariomshumancdf")
+  # 
+  # BiocManager::install("arrayQualityMetrics")
 
 #--------------------data--------------------
 geofiles = c("GSE143885")
@@ -254,7 +261,7 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   # print('test3')
   
   # Delete the RAW file
-  unlink(tar_file_output_f, recursive = TRUE)
+  # unlink(tar_file_output_f, recursive = TRUE)
   return (normalized)
   
 }
@@ -288,12 +295,12 @@ save_normalized_file <- function(geo_id, normalized){
 
 #-------------------Script-------------------------
 platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list)
-print(platform_to_package_list)
+# print(platform_to_package_list)
 for (geo_id in geofiles){
   file_start_time = Sys.time()
   normalized = get_scan_upc_files(geo_id, platform_to_package_list)
   save_normalized_file(geo_id, normalized)
-  unlink("affymetrix_data", recursive = TRUE)
+  # unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
   print(paste('File download time: ', format_time_diff(total_file_time)))
@@ -308,4 +315,13 @@ print(paste('Total time: ', format_time_diff(total_time)))
 # print(pkgName)
 # print(type(pkgName))
 
-print(get_brain_array_packages(target_geo_ids, platform_list))
+# print(get_brain_array_packages(target_geo_ids, platform_list))
+
+BiocManager::install("pd.clariom.s.human")
+
+install.packages("cli", type = "binary")
+
+untar('affymetrix_data/GSE143885_RAW/GSM4276198_EA1665_01.CEL.gz', exdir = 'affymetrix_data/GSE143885_RAW')
+affyBatch <- ReadAffy(celfile.path = "affymetrix_data/GSE143885_RAW", cdfname="clariomshumancdf")
+testing_array = arrayQualityMetrics(expressionset = affyBatch)
+
