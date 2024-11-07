@@ -137,6 +137,12 @@ target_geo_ids <- c( # these are all the human GSE's (hs)
 
 #------------------functions----------------------
 
+quality_control_removal <- function(cel_dir_path){
+  cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
+  cel_files = read.celfiles(cel_file_paths)
+  test_results = arrayQualityMetrics(expressionset = cel_files)
+}
+
 clean_normalized <- function(normalized){ # I dont think this is needed
   normalized_tibble = as.tibble(normal)
 }
@@ -240,6 +246,9 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   # List all the .CEL files in the directory
   cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
+  # This cleans up the data and removes outliers
+  quality_control_removal(tar_file_output_f)
+  
   # Make a list of the first 10 files
   cel_files = c(cel_files[1:10])
   
@@ -319,9 +328,16 @@ print(paste('Total time: ', format_time_diff(total_time)))
 
 BiocManager::install("pd.clariom.s.human")
 
-install.packages("cli", type = "binary")
+install.packages("cli", type = "binay")
 
-untar('affymetrix_data/GSE143885_RAW/GSM4276198_EA1665_01.CEL.gz', exdir = 'affymetrix_data/GSE143885_RAW')
-affyBatch <- ReadAffy(celfile.path = "affymetrix_data/GSE143885_RAW", cdfname="clariomshumancdf")
-testing_array = arrayQualityMetrics(expressionset = affyBatch)
+cel_dir_path = "affymetrix_data/GSE143885_RAW"
+#cel_file_paths = list.files(cel_dir_path)
 
+# if (!require("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# 
+# BiocManager::install("pd.clariom.s.human")
+
+cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
+cel_files = read.celfiles(cel_file_paths)
+test_results = arrayQualityMetrics(expressionset = cel_files)#, outdir = )
