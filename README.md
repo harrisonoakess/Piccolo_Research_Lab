@@ -82,3 +82,19 @@ GSE5390
 
 
 arrayQualityMetrics
+
+
+
+## 10/17/24 notes ##
+### Questions ###
+- go through the documentation of arrayQualityMetrics
+- ask about the docker tutorial
+- ask about keycard
+
+### Notes ###
+- when ready, meet with Dr. P to talk about docker
+- pull the values we want and put into a tibble, then if each metrix is within a certain threshhold, keep
+- look at the data and find bad data
+- understand the metrix from the graphs and such
+- prepare everything for DOJO
+- when we run the function, specify to not have an output for every cel file
