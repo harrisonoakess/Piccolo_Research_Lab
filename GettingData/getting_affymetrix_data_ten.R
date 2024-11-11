@@ -331,6 +331,8 @@ if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("pd.clariom.s.human")
 
+# https://www.bioconductor.org/packages/release/bioc/vignettes/arrayQualityMetrics/inst/doc/aqm.pdf
+
 cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
 cel_files = read.celfiles(cel_file_paths)
 test_results = arrayQualityMetrics(expressionset = cel_files)#, outdir = )
