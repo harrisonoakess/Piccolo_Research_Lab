@@ -138,9 +138,13 @@ target_geo_ids <- c( # these are all the human GSE's (hs)
 #------------------functions----------------------
 
 quality_control_removal <- function(cel_dir_path){
-  cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
+  print(cel_dir_path)
+  cel_file_paths = list.celfiles(cel_dir_path, full.name = TRUE)
   cel_files = read.celfiles(cel_file_paths)
   test_results = arrayQualityMetrics(expressionset = cel_files)
+  which_integers = test_results$modules$maplot@outliers@which
+  print(which_integers)
+  # Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
 }
 
 clean_normalized <- function(normalized){ # I dont think this is needed
@@ -325,7 +329,7 @@ print(paste('Total time: ', format_time_diff(total_time)))
 # install.packages("cli", type = "binay")
 
 cel_dir_path = "affymetrix_data/GSE143885_RAW"
-cel_file_paths = list.files(cel_dir_path)
+# cel_file_paths = list.files(cel_dir_path)
 
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
@@ -336,4 +340,5 @@ BiocManager::install("pd.clariom.s.human")
 cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
 cel_files = read.celfiles(cel_file_paths)
 test_results = arrayQualityMetrics(expressionset = cel_files)#, outdir = )
-print(test_results$modules$maplot@outliers@which)
+# print(test_results$modules$maplot@outliers@which)
+# print(type(test_results$modules$maplot@outliers@which))
