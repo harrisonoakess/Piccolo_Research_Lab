@@ -24,7 +24,7 @@ library(arrayQualityMetrics)
   # BiocManager::install("arrayQualityMetrics")
 
 #--------------------data--------------------
-geofiles = c("GSE143885")
+geofiles = c("GSE138861")
 
 # geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
 
@@ -138,21 +138,16 @@ target_geo_ids <- c( # these are all the human GSE's (hs)
 #------------------functions----------------------
 
 quality_control_removal <- function(cel_dir_path){
-  print(cel_dir_path)
-  print("hardcode removal")
-  # file.remove(paste0(cel_dir_path, GSM4120549_9_AMKL_1.CEL.gz))
-  # file.remove(paste0(cel_dir_path, GSM4120550_10_AMKL_2.CEL.gz))
   cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
   cel_files = read.celfiles(cel_file_paths)
-  test_results = arrayQualityMetrics(expressionset = cel_files)
+  test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
+  unlink("quality_output_file", recursive = TRUE)
   which_integers = test_results$modules$maplot@outliers@which
-  print(which_integers)
   # Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
-  # for (num in which_integers){
-  #   file_for_delete = cel_files[num]
-  #   print(file_for_delete)
-  #   # file.remove(files_for_delete)
-  # }
+  for (num in which_integers){
+    file_for_delete = cel_file_paths[num]
+    file.remove(file_for_delete)
+  }
 }
 
 clean_normalized <- function(normalized){ # I dont think this is needed
