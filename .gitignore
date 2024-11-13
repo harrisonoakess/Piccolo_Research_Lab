@@ -6,3 +6,4 @@
 affymetrix_data
 GSE11877
 "arrayQualityMetrics report for cel_files"
+quality_output_file
