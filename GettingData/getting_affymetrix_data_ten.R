@@ -139,12 +139,20 @@ target_geo_ids <- c( # these are all the human GSE's (hs)
 
 quality_control_removal <- function(cel_dir_path){
   print(cel_dir_path)
-  cel_file_paths = list.celfiles(cel_dir_path, full.name = TRUE)
+  print("hardcode removal")
+  # file.remove(paste0(cel_dir_path, GSM4120549_9_AMKL_1.CEL.gz))
+  # file.remove(paste0(cel_dir_path, GSM4120550_10_AMKL_2.CEL.gz))
+  cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
   cel_files = read.celfiles(cel_file_paths)
   test_results = arrayQualityMetrics(expressionset = cel_files)
   which_integers = test_results$modules$maplot@outliers@which
   print(which_integers)
   # Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
+  # for (num in which_integers){
+  #   file_for_delete = cel_files[num]
+  #   print(file_for_delete)
+  #   # file.remove(files_for_delete)
+  # }
 }
 
 clean_normalized <- function(normalized){ # I dont think this is needed
@@ -328,17 +336,19 @@ print(paste('Total time: ', format_time_diff(total_time)))
 # 
 # install.packages("cli", type = "binay")
 
-cel_dir_path = "affymetrix_data/GSE143885_RAW"
+# cel_dir_path = "affymetrix_data/GSE143885_RAW"
 # cel_file_paths = list.files(cel_dir_path)
-
-if (!require("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install("pd.clariom.s.human")
+# 
+# if (!require("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# BiocManager::install("pd.clariom.s.human")
 
 # https://www.bioconductor.org/packages/release/bioc/vignettes/arrayQualityMetrics/inst/doc/aqm.pdf
 
-cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
-cel_files = read.celfiles(cel_file_paths)
-test_results = arrayQualityMetrics(expressionset = cel_files)#, outdir = )
+# cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
+# cel_files = read.celfiles(cel_file_paths)
+# test_results = arrayQualityMetrics(expressionset = cel_files)#, outdir = )
 # print(test_results$modules$maplot@outliers@which)
 # print(type(test_results$modules$maplot@outliers@which))
+
+
