@@ -10,7 +10,6 @@ library(SCAN.UPC)
 library(lubridate)
 library(arrayQualityMetrics)
 
-
 # if (!require("BiocManager", quietly = TRUE)) 
 # install.packages("arrayQualityMetrics")
 # BiocManager::install("SCAN.UPC")
