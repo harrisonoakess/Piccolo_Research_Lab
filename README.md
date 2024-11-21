@@ -99,7 +99,12 @@ arrayQualityMetrics
 - prepare everything for DOJO
 - when we run the function, specify to not have an output for every cel file
 
-### notes ###
-- ssh hoakes@dojo.byu.edu
+### 11/24/24 ###
+- ssh netid@dojo.byu.edu
 - /Analysis to access the shared drive
 - .dockerignore
+
+### Everything We Want to DO ###
+- Make it so the script works with human or mouse samples
+- Look at a plot of all the data to visualize quality
+- create a quality scale
