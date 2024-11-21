@@ -98,3 +98,8 @@ arrayQualityMetrics
 - understand the metrix from the graphs and such
 - prepare everything for DOJO
 - when we run the function, specify to not have an output for every cel file
+
+### notes ###
+- ssh hoakes@dojo.byu.edu
+- /Analysis to access the shared drive
+- .dockerignore
