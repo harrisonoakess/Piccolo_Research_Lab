@@ -6,6 +6,7 @@ library(BiocManager)
 library(tidyverse)
 library(SCAN.UPC) 
 library(lubridate)
+library(arrayQualityMetrics)
 
 # if (!require("BiocManager", quietly = TRUE)) 
 #   install.packages("BiocManager")
@@ -15,7 +16,7 @@ library(lubridate)
 # BiocManager::install("GEOquery")
 
 #--------------------data--------------------
-geofiles = c("GSE143885")
+geofiles = c("GSE138861")
 
 # geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
 
@@ -118,25 +119,6 @@ target_geo_ids <- c(
 )
 #--------------------functions--------------------
 
-get_brain_array_packages <- function(target_geo_ids, platform_list){
-  platform_to_package_list = list()
-  for (geo_id in target_geo_ids){
-    untar_and_delete(geo_id)
-    # formatted string for the untar output
-    tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-    # List all the .CEL files in the directory
-    cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-    
-    pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
-    print(pkgName)
-    useable_platform = platform_list[[geo_id]]
-    print(platform_to_package_list)
-    
-    platform_to_package_list[[useable_platform]] = pkgName #######################################
-  }
-  return(platform_to_package_list) ###############################
-}
-
 untar_and_delete <- function(geo_id) {
   
   if (!file.exists(geo_id)){
@@ -181,6 +163,50 @@ untar_and_delete <- function(geo_id) {
     file.remove(files_to_delete)
   }
 }
-#--------------script-----------
-platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list)
-print(platform_to_package_list)
+
+geo_id = "GSE138861"
+
+# formated string for the untar
+tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
+
+# formated string for the untar output
+tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+
+if (!file.exists(tar_file_output_f)){
+  untar_and_delete(geo_id)
+  print('untar successful')
+}
+
+# Sets the file pattern to .CEL, so scan pulls everything with that ending
+celFilePattern <- file.path(tar_file_output_f, "*.CEL.gz")
+
+# formated string for the SCAN output
+scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
+# print('test')
+
+# List all the .CEL files in the directory
+cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+
+cel_dir_path = tar_file_output_f
+
+# This cleans up the data and removes outliers
+threshold = 0.15
+
+cel_file_paths = list.celfiles(cel_dir_path, full.name = TRUE)
+cel_files = read.celfiles(cel_file_paths)
+test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
+# unlink("quality_output_file", recursive = TRUE)
+statistic_list = test_results$modules$maplot@outliers@statistic
+statistic_tibble = as_tibble(statistic_list)
+statistic_tibble = add_column(statistic_tibble, cel_file = cel_file_paths)
+
+write_tsv(statistic_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
+
+# Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
+for (row in 1:nrow(statistic_tibble)){
+  
+  if (statistic_tibble[row, "value"] > threshold){
+    file_for_delete = cel_file_paths[row]
+    file.remove(file_for_delete)
+  }
+}

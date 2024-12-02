@@ -138,15 +138,25 @@ target_geo_ids <- c( # these are all the human GSE's (hs)
 #------------------functions----------------------
 
 quality_control_removal <- function(cel_dir_path){
-  cel_file_paths = list.celfiles(cel_dir_path, listGzipped = TRUE, full.name = TRUE)
+  threshold = 0.15
+  
+  cel_file_paths = list.celfiles(cel_dir_path, full.name = TRUE)
   cel_files = read.celfiles(cel_file_paths)
   test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
   unlink("quality_output_file", recursive = TRUE)
-  which_integers = test_results$modules$maplot@outliers@which
+  statistic_list = test_results$modules$maplot@outliers@statistic
+  statistic_tibble = as_tibble(statistic_list)
+  statistic_tibble = add_column(statistic_tibble, cel_file = cel_file_paths)
+  
+  write_tsv(statistic_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
+  
   # Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
-  for (num in which_integers){
-    file_for_delete = cel_file_paths[num]
-    file.remove(file_for_delete)
+  for (row in 1:nrow(statistic_tibble)){
+    
+    if (statistic_tibble[row, "value"] > threshold){
+      file_for_delete = cel_file_paths[row]
+      file.remove(file_for_delete)
+    }
   }
 }
 
