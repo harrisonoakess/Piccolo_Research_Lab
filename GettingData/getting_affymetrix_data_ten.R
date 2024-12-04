@@ -24,7 +24,7 @@ library(arrayQualityMetrics)
   # BiocManager::install("arrayQualityMetrics")
 
 #--------------------data--------------------
-geofiles = c("GSE138861")
+geofiles = c("GSE138861", "GSE143885")
 
 # geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
 
