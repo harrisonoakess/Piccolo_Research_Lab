@@ -24,7 +24,7 @@ library(arrayQualityMetrics)
   # BiocManager::install("arrayQualityMetrics")
 
 #--------------------data--------------------
-geofiles = c("GSE138861")
+geofiles = c("GSE138861", "GSE143885")
 
 # geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
 
@@ -116,7 +116,7 @@ print(platform_list$"GSE99135")
 #   "GSE5390"
 # )
 
-target_geo_ids <- c( # these are all the human GSE's (hs)
+human_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE143885",
   "GSE19681",
   "GSE65055",
@@ -127,13 +127,13 @@ target_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE30517"
 )
 
-# target_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mu)
-#                     "GSE1281", 
-#                     "GSE222355", 
-#                     "GSE16676", 
-#                     "GSE158376", 
-#                     "GSE39159"
-# )
+mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mu)
+                    "GSE1281",
+                    "GSE222355",
+                    "GSE16676",
+                    "GSE158376",
+                    "GSE39159"
+)
 
 #------------------functions----------------------
 
@@ -164,20 +164,34 @@ clean_normalized <- function(normalized){ # I dont think this is needed
   normalized_tibble = as.tibble(normal)
 }
 
-get_brain_array_packages <- function(target_geo_ids, platform_list){
+get_brain_array_packages <- function(human_geo_ids, mouse_geo_ids, platform_list){
   if (!file.exists("Data/BrainArrayPackage")){
     platform_to_package_list = list()
-    for (geo_id in target_geo_ids){
+    for (geo_id in human_geo_ids){
       untar_and_delete(geo_id)
       # formatted string for the untar output
       tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
       # List all the .CEL files in the directory
       cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
       
-      pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
+      
+      pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
       # print(pkgName)
       useable_platform = platform_list[[geo_id]]
-      # print(platform_to_package_list)
+      
+      platform_to_package_list[[useable_platform]] = pkgName
+    }
+    for (geo_id in mouse_geo_ids){
+      untar_and_delete(geo_id)
+      # formatted string for the untar output
+      tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+      # List all the .CEL files in the directory
+      cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+      
+      
+      pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mu", "entrezg")
+      # print(pkgName)
+      useable_platform = platform_list[[geo_id]]
       
       platform_to_package_list[[useable_platform]] = pkgName
     }
@@ -188,7 +202,6 @@ get_brain_array_packages <- function(target_geo_ids, platform_list){
     return(platform_to_package_list)
   }
   else{
-    print("test")
     platform_to_package_tibble_from_tsv = read_tsv("Data/BrainArrayPackage/platform_to_package_list", 
                                                    col_types = cols(.default = col_character()), quote = "\"")
     platform_to_package_list_from_tsv = setNames(as.list(platform_to_package_tibble_from_tsv$value), platform_to_package_tibble_from_tsv$name)
@@ -320,7 +333,7 @@ save_normalized_file <- function(geo_id, normalized){
 }
 
 #-------------------Script-------------------------
-platform_to_package_list = get_brain_array_packages(target_geo_ids, platform_list)
+platform_to_package_list = get_brain_array_packages(human_geo_ids, mouse_geo_ids, platform_list)
 # print(platform_to_package_list)
 for (geo_id in geofiles){
   file_start_time = Sys.time()
