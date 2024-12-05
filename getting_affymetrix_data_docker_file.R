@@ -1,4 +1,4 @@
-# setwd("my_dir")
+setwd("my_dir")
 total_start_time = Sys.time()
 options(timeout = max(300, getOption("timeout")))
 #--------------------libraries--------------------
@@ -11,13 +11,11 @@ library(SCAN.UPC)
 library(lubridate)
 library(arrayQualityMetrics)
 #--------------------data--------------------
-geofiles = c("GSE138861")
-
-# geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE1397", "GSE143885", "GSE149459", "GSE149460",
-#              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
-#              "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE1789", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
-#              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE4119", "GSE47014", "GSE48611", "GSE49050",
-#              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")
+geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE1397", "GSE143885", "GSE149459", "GSE149460",
+             "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
+             "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE1789", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
+             "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE4119", "GSE47014", "GSE48611", "GSE49050",
+             "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")
 
 #------------list of GEOs and Platforms----------
 platform_list <- list(
@@ -280,6 +278,9 @@ save_normalized_file <- function(geo_id, normalized){
 
 #-------------------Script-------------------------
 platform_to_package_list = get_brain_array_packages(human_geo_ids, mouse_geo_ids, platform_list)
+if (!file.exists("Data/Affymetrix")){
+  dir.create("Data/Affymetrix")
+}
 for (geo_id in geofiles){
   file_start_time = Sys.time()
   normalized = get_scan_upc_files(geo_id, platform_to_package_list)
