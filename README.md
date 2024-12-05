@@ -101,7 +101,7 @@ arrayQualityMetrics
 
 ### 11/24/24 ###
 - ssh netid@dojo.byu.edu
-- /Analysis to access the shared drive
+- "cd /Analysis" to access the shared drive
 - .dockerignore
 
 ### Everything We Want to DO ###
