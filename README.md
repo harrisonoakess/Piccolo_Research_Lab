@@ -108,3 +108,7 @@ arrayQualityMetrics
 - Make it so the script works with human or mouse samples
 - Look at a plot of all the data to visualize quality
 - create a quality scale
+
+
+### 12/5/24 ###
+- after file make a histagram and a density plot on top for the quality scores
