@@ -1,3 +1,4 @@
+install.packages("tidyverse")
 install.packages("arrayQualityMetrics")
 install.packages("lubridate")
 install.packages("BiocManager")
