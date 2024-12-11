@@ -6,26 +6,24 @@ library(GEOquery)
 library(affy)
 library(tidyverse)
 library(BiocManager)
-library(tidyverse)
-library(SCAN.UPC) 
+library(SCAN.UPC)
 library(lubridate)
 library(arrayQualityMetrics)
 
-
 # if (!require("BiocManager", quietly = TRUE)) 
-  install.packages("arrayQualityMetrics")
+  # install.packages("arrayQualityMetrics")
 # BiocManager::install("SCAN.UPC")
 # if (!requireNamespace("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 # BiocManager::install("GEOquery")
   # if (!require("BiocManager", quietly = TRUE))
   #   install.packages("BiocManager")
-  BiocManager::install("clariomshumancdf")
+  # BiocManager::install("clariomshumancdf")
   # 
   # BiocManager::install("arrayQualityMetrics")
 
 #--------------------data--------------------
-geofiles = c("GSE138861", "GSE143885")
+geofiles = c("GSE110064")
 
 # geofiles = c('GSE1397', 'GSE138861', "GSE143885", "GSE149459", "GSE149460")
 
@@ -281,7 +279,7 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   quality_control_removal(tar_file_output_f)
   
   # Make a list of the first 10 files
-  cel_files = c(cel_files[1:10])
+  # cel_files = c(cel_files[1:10])
   
   # pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
   # print(pkgName)
@@ -340,7 +338,7 @@ for (geo_id in geofiles){
   file_start_time = Sys.time()
   normalized = get_scan_upc_files(geo_id, platform_to_package_list)
   save_normalized_file(geo_id, normalized)
-  # unlink("affymetrix_data", recursive = TRUE)
+  unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
   print(paste('File download time: ', format_time_diff(total_file_time)))
