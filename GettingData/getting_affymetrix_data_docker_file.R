@@ -203,9 +203,6 @@ untar_and_delete <- function(geo_id) {
   # List all the .CEL files in the directory
   cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
-  # Make a list of the first 10 files
-  cel_files = c(cel_files[1:10])
-  
   # Makes a list of all files that are not in the above cel_files vector
   files_to_delete <- setdiff(list.files(tar_file_output_f, full.names= TRUE), cel_files)
   
@@ -284,7 +281,7 @@ if (!file.exists("Data/Affymetrix")){
 for (geo_id in geofiles){
   file_start_time = Sys.time()
   normalized = get_scan_upc_files(geo_id, platform_to_package_list)
-  # save_normalized_file(geo_id, normalized)
+  save_normalized_file(geo_id, normalized)
   unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
