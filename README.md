@@ -112,3 +112,5 @@ arrayQualityMetrics
 
 ### 12/5/24 ###
 - after file make a histagram and a density plot on top for the quality scores
+- 
+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
