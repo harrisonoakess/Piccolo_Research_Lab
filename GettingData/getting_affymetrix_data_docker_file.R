@@ -78,9 +78,6 @@ platform_list <- list(
   "GSE99135"=	"[Mogène -10_st ]	AFFYMETRIX	MOUSE	gene	array"
 )
 
-print(platform_list$"GSE99135")
-
-
 #------------unique gse_platforms-----------------
 human_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE143885",
