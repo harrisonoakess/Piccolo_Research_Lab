@@ -114,17 +114,13 @@ quality_control_removal <- function(cel_dir_path){
   write_tsv(statistic_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
   
   # Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
-  for (row in 1:nrow(statistic_tibble)){
+  # for (row in 1:nrow(statistic_tibble)){
     
-    if (statistic_tibble[row, "value"] > threshold){
-      file_for_delete = cel_file_paths[row]
-      file.remove(file_for_delete)
-    }
-  }
-}
-
-clean_normalized <- function(normalized){ # I dont think this is needed
-  normalized_tibble = as.tibble(normal)
+  #   if (statistic_tibble[row, "value"] > threshold){
+  #     file_for_delete = cel_file_paths[row]
+  #     file.remove(file_for_delete)
+  #   }
+  # }
 }
 
 get_brain_array_packages <- function(human_geo_ids, mouse_geo_ids, platform_list){
