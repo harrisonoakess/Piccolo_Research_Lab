@@ -1,4 +1,4 @@
-# setwd("/my_dir")
+setwd("/my_dir")
 total_start_time = Sys.time()
 options(timeout = max(300, getOption("timeout")))
 #--------------------libraries--------------------
@@ -102,8 +102,10 @@ mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
 
 quality_control_removal <- function(cel_dir_path){
   threshold = 0.15
-  
-  cel_file_paths = list.celfiles(cel_dir_path, full.name = TRUE)
+  cel_file_paths = list.celfiles(cel_dir_path, pattern = "*", full.name = TRUE)
+  print(cel_file_paths)
+#  cel_file_paths = list.files(cel_dir_path, pattern = "*", full.name = TRUE)
+  stop()
   cel_files = read.celfiles(cel_file_paths)
   test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
   unlink("quality_output_file", recursive = TRUE)
