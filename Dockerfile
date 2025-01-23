@@ -1,7 +1,11 @@
-FROM bioconductor/bioconductor:RELEASE_3_20
+FROM bioconductor/bioconductor:RELEASE_3_18
 
-ADD install_packages.R /
+ADD install_core_packages.R /
 
-RUN Rscript /install_packages.R
+RUN Rscript /install_core_packages.R
+
+ADD install_array_packages.R /
+
+RUN Rscript /install_array_packages.R
 
 WORKDIR /my_dir
