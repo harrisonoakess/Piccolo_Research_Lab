@@ -19,7 +19,11 @@ library(arrayQualityMetrics)
 #                 GSE47014->
 
 
-geofiles = c("GSE47014")
+geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
+             "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
+             "GSE16677", "GSE168111", "GSE17760", "GSE1789","GSE47014", "GSE19680", "GSE19681", "GSE20910", "GSE222355",
+             "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
+             "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE99135")
 
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
@@ -177,7 +181,14 @@ quality_control_removal <- function(cel_dir_path){
 #   }
 # }
 untar_and_delete <- function(geo_id) {
-  
+  if (!(geo_id %in% platform_list)) {
+    stop(paste(geo_id, "not found in platform_list"))
+  }
+
+  if (file.exists("affymetrix_data")){
+    unlink("affymetrix_data", recursive = TRUE)
+  }
+
   if (!file.exists(geo_id)){
     # Download supplementary files
     print(paste("Downloading", geo_id))
@@ -225,7 +236,7 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   
   if (!file.exists(tar_file_output_f)){
     untar_and_delete(geo_id)
-    print('untar successful')
+    print('Untar Successful')
   }
   
   # Sets the file pattern to .CEL, so scan pulls everything with that ending
