@@ -1,4 +1,4 @@
-setwd("/my_dir")
+# setwd("/my_dir")
 total_start_time = Sys.time()
 options(timeout = max(300, getOption("timeout")))
 #--------------------libraries--------------------
@@ -13,11 +13,19 @@ library(arrayQualityMetrics)
 
 # geofiles = c("GSE143885")
 
-geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE1397", "GSE143885", "GSE149459", "GSE149460",
-             "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
-             "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE1789", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
-             "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE4119", "GSE47014", "GSE48611", "GSE49050",
-             "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")
+# error_geo_files(, GSE17459, GSE84887, GSE1294, GSE19836, -> All the CEL files must be of the same type.
+# Error in read.celfiles(cel_file_paths) : 
+#   checkChipTypes(filenames, verbose, "affymetrix", TRUE) is not TRUE,
+#                 GSE47014->
+
+
+geofiles = c("GSE47014")
+
+# geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
+#              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
+#              "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE1789","GSE47014", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
+#              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
+#              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")
 
 #------------list of GEOs and Platforms----------
 platform_list <- list(
@@ -33,7 +41,6 @@ platform_list <- list(
   "GSE1282" = "[MG_U74Bv2] Affymetrix Murine Genome U74B Version 2 Array (GPL82)",
   "GSE1294" = "[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)",
   "GSE138861" = "[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)",
-  "GSE1397" = "[HG-U133A] Affymetrix Human Genome U133A Array (GPL96)",
   "GSE143885" = "[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)",
   "GSE149459" = "[MoGene-1_0-st] Affymetrix Mouse Gene 1.0 ST Array [transcript (gene) version] (GPL6246)",
   "GSE149460" = "[MoGene-1_0-st] Affymetrix Mouse Gene 1.0 ST Array [transcript (gene) version] (GPL6246)",
@@ -64,12 +71,11 @@ platform_list <- list(
   "GSE35665"=	"[HuEx -1 _st ]	Affymetrix	Human Exon	Array	( GPL5175)",	
   "GSE36787"=	"[HuGene -1 _st ]	Affymetrix	Human	Gene	Array	( GPL6244)",	
   "GSE39159"=	"[MoGene -1 _st ]	Affymetrix	Mouse	Gene	Array	( GPL6246)",	
-  "GSE4119"=	"[HG -U133A ]	Affymetrix	Human	Genome	Array	( GPL96)",	
   "GSE47014"=	"[PrimeView ]	Affymetrix	Human	Gene Expression	Array	( GPL15207)",	
   "GSE48611"=	"[HG -U133_Plus ]	Affymetrix	Human	Genome	U133 Plus	Array",	
   "GSE49050"=	"[Mouse430 ]	Affymetrix	Mouse	Genome	Array",	
   "GSE49635"=	"[MoGene -1 _st ]	AffyMetriX	MOUSE	Gene	Array",	
-  "GSE539"=	"[Hg -U1133a ]	AFFYMETRIX	HUMAN	genome	array",	
+  "GSE5390"=	"[Hg -U1133a ]	AFFYMETRIX	HUMAN	genome	array",	
   "GSE59630"=	"[Huex -10_st ]	AFFYMETRIX	HUMAN	exon	array",	
   "GSE62538"=	"[Mogène -10_st ]	AFFYMETRIX	MOUSE	gene	array",	
   "GSE6283"=	"[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array",	
@@ -85,7 +91,7 @@ human_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE143885",
   "GSE19681",
   "GSE65055",
-  "GSE47014",
+  # "GSE47014",
   "GSE35665",
   "GSE36787",
   "GSE168111",
@@ -106,7 +112,6 @@ quality_control_removal <- function(cel_dir_path){
   threshold = 0.15
   # cel_file_paths = list.celfiles(cel_dir_path, pattern = "*", full.name = TRUE)
   cel_file_paths = list.files(cel_dir_path, pattern = "*", full.name = TRUE)
-  print(cel_file_paths)
   cel_files = read.celfiles(cel_file_paths)
   print(cel_files)
   test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
@@ -237,12 +242,11 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   platform = platform_list[[geo_id]]
   pkgName = platform_to_package_list[[platform]]
   print(pkgName)
-  return (0) # BEWARE REMOVE THIS LINE WHEN WE ARE READY TO NORMALIZE AND UNCOMMENT THE LINE AFTER THIS FUNCTION RETURNS IN THE SCIRPT
   
   # last step to converting the information
-  normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
+  # normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
   
-  return (normalized)
+  # return (normalized)
 }
 
 format_time_diff <- function(time_diff) {
@@ -276,7 +280,7 @@ save_normalized_file <- function(geo_id, normalized){
 # platform_to_package_list = get_brain_array_packages(human_geo_ids, mouse_geo_ids, platform_list)
 
 
-platform_to_package_tibble_from_tsv = read_tsv("Data/BrainArrayPackage/platform_to_package_list", 
+platform_to_package_tibble_from_tsv = read_tsv("/package_info/platform_to_brain_array.tsv", 
                                                 col_types = cols(.default = col_character()), quote = "\"")
 platform_to_package_list = setNames(as.list(platform_to_package_tibble_from_tsv$value), platform_to_package_tibble_from_tsv$name)
 
@@ -286,8 +290,10 @@ if (!file.exists("Data/Affymetrix")){
 }
 for (geo_id in geofiles){
   file_start_time = Sys.time()
-  normalized = get_scan_upc_files(geo_id, platform_to_package_list)
-  save_normalized_file(geo_id, normalized)
+  get_scan_upc_files(geo_id, platform_to_package_list)
+
+  # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
+  # save_normalized_file(geo_id, normalized)
   unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time

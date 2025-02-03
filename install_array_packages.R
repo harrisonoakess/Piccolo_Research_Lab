@@ -1,4 +1,16 @@
-setwd("/my_dir")
+
+library(GEOquery)
+library(affy)
+library(tidyverse)
+library(BiocManager)
+library(SCAN.UPC) 
+library(lubridate)
+library(arrayQualityMetrics)
+
+if (!requireNamespace("BiocManager", quietly = TRUE)) 
+    install.packages("BiocManager")
+
+BiocManager::install(c("pdInfoBuilder", "affxparser", "Biostrings"))
 
 platform_list <- list(
   "E-MEXP-3355" = "Affymetrix GeneChip Mouse Gene 1.0 ST Array [MoGene-1_0-st-v1]",
@@ -65,7 +77,7 @@ human_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE143885",
   "GSE19681",
   "GSE65055",
-  "GSE47014",
+  # "GSE47014",
   "GSE35665",
   "GSE36787",
   "GSE168111",
@@ -80,8 +92,49 @@ mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
                    "GSE39159"
 )
 
+untar_and_delete <- function(geo_id) {
+  
+  if (!file.exists(geo_id)){
+    # Download supplementary files
+    print(paste("Downloading", geo_id))
+    getGEOSuppFiles(geo_id)
+    print("Download Successful")
+  }
+  
+  # formated string for the untar
+  tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
+  
+  # formated string for the untar output
+  tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+  
+  if (length(list.files(geo_id)) == 0){
+    unlink(geo_id, recursive = TRUE)
+    unlink(tar_file_output_f, recursive = TRUE)
+    return()
+  }
+  
+  # Extract the tar file
+  untar(tar_file_f, exdir = tar_file_output_f)
+  print("Unzip Successfull")
+  
+  # Deletes the file with the zipped files
+  unlink(geo_id, recursive = TRUE)
+  
+  # List all the .CEL files in the directory
+  cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+  
+  # Makes a list of all files that are not in the above cel_files vector
+  files_to_delete <- setdiff(list.files(tar_file_output_f, full.names= TRUE), cel_files)
+  
+  # Deletes all files in the files_to_delete
+  if (length(files_to_delete) > 0) {
+    file.remove(files_to_delete)
+  }
+}
+
 platform_to_package_list = list()
 for (geo_id in human_geo_ids){
+  
     untar_and_delete(geo_id)
     # formatted string for the untar output
     tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
@@ -93,7 +146,10 @@ for (geo_id in human_geo_ids){
     useable_platform = platform_list[[geo_id]]
     
     platform_to_package_list[[useable_platform]] = pkgName
+    files = read.celfiles(cel_files)
+
 }
+
 for (geo_id in mouse_geo_ids){
     untar_and_delete(geo_id)
     # formatted string for the untar output
@@ -106,8 +162,11 @@ for (geo_id in mouse_geo_ids){
     useable_platform = platform_list[[geo_id]]
     
     platform_to_package_list[[useable_platform]] = pkgName
+
+    files = read.celfiles(cel_files)
 }
+
 unlink("affymetrix_data", recursive = TRUE)
 dir.create("Data/BrainArrayPackage")
 platform_to_package_list_tibble = tibble(name = names(platform_to_package_list), value = unlist(platform_to_package_list))
-write_tsv(platform_to_package_list_tibble, "Data/BrainArrayPackage/platform_to_package_list", quote = "all")
+write_tsv(platform_to_package_list_tibble, "/package_info/platform_to_brain_array.tsv", quote = "all")
