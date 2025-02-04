@@ -19,11 +19,15 @@ library(arrayQualityMetrics)
 #                 GSE47014->
 
 
-geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
-             "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
-             "GSE16677", "GSE168111", "GSE17760", "GSE1789","GSE47014", "GSE19680", "GSE19681", "GSE20910", "GSE222355",
+geofiles = c("GSE19680", "GSE19681", "GSE20910", "GSE222355",
              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE99135")
+
+# geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
+#              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
+#              "GSE16677", "GSE168111", "GSE17760", "GSE1789", "GSE19680", "GSE19681", "GSE20910", "GSE222355",
+#              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
+#              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE99135")
 
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
@@ -43,7 +47,7 @@ platform_list <- list(
   "GSE11877" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE1281" = "[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)",
   "GSE1282" = "[MG_U74Bv2] Affymetrix Murine Genome U74B Version 2 Array (GPL82)",
-  "GSE1294" = c("[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)", "[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)")
+  "GSE1294" = c("[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)", "[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)"),
   "GSE138861" = "[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)",
   "GSE143885" = "[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)",
   "GSE149459" = "[MoGene-1_0-st] Affymetrix Mouse Gene 1.0 ST Array [transcript (gene) version] (GPL6246)",
@@ -300,14 +304,26 @@ if (!file.exists("Data/Affymetrix")){
 }
 for (geo_id in geofiles){
   file_start_time = Sys.time()
-  get_scan_upc_files(geo_id, platform_to_package_list)
+  split_geo_ids = c()
+  if (is.vector(platform_list[geo_id])){
+    # if the list is a vector then it will split so it can run the for loop below
+
+
+
+  }else{
+    # if its a string, it will just add the the vector for splitting.
+    split_geo_ids = c(geo_id)
+  }
+  for (split_id in split_geo_ids){
+     get_scan_upc_files(geo_id, platform_to_package_list)
 
   # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
   # save_normalized_file(geo_id, normalized)
+  }
   unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
-  print(paste('File download time: ', format_time_diff(total_file_time)))
+  print(paste('File download time: ', format_time_diff(total_file_time))) 
 }
 total_end_time = Sys.time()
 total_time = total_end_time - total_start_time
