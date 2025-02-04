@@ -43,7 +43,7 @@ platform_list <- list(
   "GSE11877" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE1281" = "[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)",
   "GSE1282" = "[MG_U74Bv2] Affymetrix Murine Genome U74B Version 2 Array (GPL82)",
-  "GSE1294" = "[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)",
+  "GSE1294" = c("[MG_U74Av2] Affymetrix Murine Genome U74A Version 2 Array (GPL81)", "[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)")
   "GSE138861" = "[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)",
   "GSE143885" = "[Clariom_S_Human] Affymetrix Clariom S Assay, Human (Includes Pico Assay) (GPL23159)",
   "GSE149459" = "[MoGene-1_0-st] Affymetrix Mouse Gene 1.0 ST Array [transcript (gene) version] (GPL6246)",
@@ -60,14 +60,13 @@ platform_list <- list(
   "GSE16676" = "[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)",
   "GSE16677" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE168111" = "[HTA-2_0] Affymetrix Human Transcriptome Array 2.0 [transcript (gene) version] (GPL17586)",
-  "GSE17459" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
+  "GSE17459" = c("[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)", "[HG-U133A] Affymetrix Human Genome U133A Array (GPL96)"),
   "GSE17760" = "[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)",
   "GSE1789" = "[HG-U133A] Affymetrix Human Genome U133A Array (GPL96)",
   "GSE19680" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE19681" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
-  "GSE19836" = "[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)",
+  "GSE19836" = c("[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)", "GPL8321	[Mouse430A_2] Affymetrix Mouse Genome 430A 2.0 Array"),
   "GSE20910" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
-  
   "GSE222355"=	"[Clariom_S_Mouse_HT]	Affymetrix Clariom S Assay HT, Mouse	(Includes Pico Assay)	(GPL24242)",	
   "GSE30517"=	"[HG-U133A]	Affymetrix Human Genome U133A	Array	(GPL96)",	
   "GSE61804"=	"[HG-U133_Plus_2 ]	Affymetrix Human Genome	U133 Plus	( GPL570)",	
@@ -86,7 +85,7 @@ platform_list <- list(
   "GSE65055"=	"[Hugène -20_st ]	AFFYMETRIX	HUMAN	gene	array",	
   "GSE70102"=	"[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array",	
   "GSE83449"=	"[Hg -U1133a ]	AFFYMETRIX	HUMAN	genome	array",	
-  "GSE84887"=	"[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array",	
+  "GSE84887"=	c("[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array", "[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)"),	
   "GSE99135"=	"[Mogène -10_st ]	AFFYMETRIX	MOUSE	gene	array"
 )
 
@@ -181,7 +180,7 @@ quality_control_removal <- function(cel_dir_path){
 #   }
 # }
 untar_and_delete <- function(geo_id) {
-  if (!(geo_id %in% platform_list)) {
+  if (!(geo_id %in% names(platform_list))) {
     stop(paste(geo_id, "not found in platform_list"))
   }
 
