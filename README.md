@@ -112,5 +112,9 @@ arrayQualityMetrics
 
 ### 12/5/24 ###
 - after file make a histagram and a density plot on top for the quality scores
+
+  ### 2/4/25 ###
+- Check is Meta function in GEOQUery succesfully returns f]platdrom of an indivisual GSM
+- Take download and untar funciton outside of get_uc function to run before the second for loop
 - 
 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
