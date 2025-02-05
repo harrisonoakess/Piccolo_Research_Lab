@@ -11,17 +11,13 @@ library(lubridate)
 library(arrayQualityMetrics)
 #--------------------data--------------------
 
-# geofiles = c("GSE143885")
+geofiles = c("GSE143885")
 
 # error_geo_files(, GSE17459, GSE84887, GSE1294, GSE19836, -> All the CEL files must be of the same type.
 # Error in read.celfiles(cel_file_paths) : 
 #   checkChipTypes(filenames, verbose, "affymetrix", TRUE) is not TRUE,
 #                 GSE47014->
 
-
-geofiles = c("GSE19680", "GSE19681", "GSE20910", "GSE222355",
-             "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
-             "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE99135")
 
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
@@ -303,22 +299,27 @@ if (!file.exists("Data/Affymetrix")){
   dir.create("Data/Affymetrix")
 }
 for (geo_id in geofiles){
+  print("first for loop")
   file_start_time = Sys.time()
   split_geo_ids = c()
-  if (is.vector(platform_list[geo_id])){
+  if (length(platform_list[[geo_id]]) > 1){
     # if the list is a vector then it will split so it can run the for loop below
+    print("maybe its here")
 
 
 
   }else{
+    print('It got to the else')
     # if its a string, it will just add the the vector for splitting.
     split_geo_ids = c(geo_id)
   }
   for (split_id in split_geo_ids){
-     get_scan_upc_files(geo_id, platform_to_package_list)
+    print('It got to the for loop')
+    
+    get_scan_upc_files(geo_id, platform_to_package_list)
 
-  # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
-  # save_normalized_file(geo_id, normalized)
+    # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
+    # save_normalized_file(geo_id, normalized)
   }
   unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
