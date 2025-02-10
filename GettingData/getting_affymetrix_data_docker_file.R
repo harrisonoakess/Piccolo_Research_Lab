@@ -11,19 +11,9 @@ library(lubridate)
 library(arrayQualityMetrics)
 #--------------------data--------------------
 
-geofiles = c("GSE143885")
+#                 GSE47014-> primview platform error
 
-# error_geo_files(, GSE17459, GSE84887, GSE1294, GSE19836, -> All the CEL files must be of the same type.
-# Error in read.celfiles(cel_file_paths) : 
-#   checkChipTypes(filenames, verbose, "affymetrix", TRUE) is not TRUE,
-#                 GSE47014->
-
-
-# geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
-#              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
-#              "GSE16677", "GSE168111", "GSE17760", "GSE1789", "GSE19680", "GSE19681", "GSE20910", "GSE222355",
-#              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
-#              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE99135")
+geofiles = c("GSE110064")
 
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
@@ -111,74 +101,25 @@ mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
 
 #------------------functions----------------------
 
-quality_control_removal <- function(cel_dir_path){
+quality_control_removal <- function(file_list){
   threshold = 0.15
-  # cel_file_paths = list.celfiles(cel_dir_path, pattern = "*", full.name = TRUE)
-  cel_file_paths = list.files(cel_dir_path, pattern = "*", full.name = TRUE)
-  cel_files = read.celfiles(cel_file_paths)
+  print("test1")
+  print(file_list)
+  cel_files = read.celfiles(file_list)
+  print("test2")
   print(cel_files)
   test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
-  # print(test_results)
+  print("test3")
   unlink("quality_output_file", recursive = TRUE)
   statistic_list = test_results$modules$maplot@outliers@statistic
   statistic_tibble = as_tibble(statistic_list)
-  statistic_tibble = add_column(statistic_tibble, cel_file = cel_file_paths)
+  print(file_list)
+  statistic_tibble = add_column(statistic_tibble, cel_file = file_list)
   
   print(dir.exists("Data/"))
   write_tsv(statistic_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
-  
-  # Here we need to go into the file and delete the files based off the integers that are returned probably in a for loop
-  # for (row in 1:nrow(statistic_tibble)){
-    
-  #   if (statistic_tibble[row, "value"] > threshold){
-  #     file_for_delete = cel_file_paths[row]
-  #     file.remove(file_for_delete)
-  #   }
-  # }
 }
-
-# get_brain_array_packages <- function(human_geo_ids, mouse_geo_ids, platform_list){
-#   if (!file.exists("Data/BrainArrayPackage")){
-#     platform_to_package_list = list()
-#     for (geo_id in human_geo_ids){
-#       untar_and_delete(geo_id)
-#       # formatted string for the untar output
-#       tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-#       # List all the .CEL files in the directory
-#       cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-      
-      
-#       pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
-#       useable_platform = platform_list[[geo_id]]
-      
-#       platform_to_package_list[[useable_platform]] = pkgName
-#     }
-#     for (geo_id in mouse_geo_ids){
-#       untar_and_delete(geo_id)
-#       # formatted string for the untar output
-#       tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-#       # List all the .CEL files in the directory
-#       cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-      
-      
-#       pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
-#       useable_platform = platform_list[[geo_id]]
-      
-#       platform_to_package_list[[useable_platform]] = pkgName
-#     }
-#     unlink("affymetrix_data", recursive = TRUE)
-#     dir.create("Data/BrainArrayPackage")
-#     platform_to_package_list_tibble = tibble(name = names(platform_to_package_list), value = unlist(platform_to_package_list))
-#     write_tsv(platform_to_package_list_tibble, "Data/BrainArrayPackage/platform_to_package_list", quote = "all")
-#     return(platform_to_package_list)
-#   }
-#   else{
-#     platform_to_package_tibble_from_tsv = read_tsv("Data/BrainArrayPackage/platform_to_package_list", 
-#                                                    col_types = cols(.default = col_character()), quote = "\"")
-#     platform_to_package_list_from_tsv = setNames(as.list(platform_to_package_tibble_from_tsv$value), platform_to_package_tibble_from_tsv$name)
-#     return (platform_to_package_list_from_tsv)
-#   }
-# }
+  
 untar_and_delete <- function(geo_id) {
   if (!(geo_id %in% names(platform_list))) {
     stop(paste(geo_id, "not found in platform_list"))
@@ -233,11 +174,6 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   # formated string for the untar output
   tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
   
-  if (!file.exists(tar_file_output_f)){
-    untar_and_delete(geo_id)
-    print('Untar Successful')
-  }
-  
   # Sets the file pattern to .CEL, so scan pulls everything with that ending
   celFilePattern <- file.path(tar_file_output_f, "*.CEL.gz")
   
@@ -248,7 +184,6 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
   
   # This cleans up the data and removes outliers
-  quality_control_removal(tar_file_output_f)
   platform = platform_list[[geo_id]]
   pkgName = platform_to_package_list[[platform]]
   print(pkgName)
@@ -298,26 +233,57 @@ platform_to_package_list = setNames(as.list(platform_to_package_tibble_from_tsv$
 if (!file.exists("Data/Affymetrix")){
   dir.create("Data/Affymetrix")
 }
+
 for (geo_id in geofiles){
-  print("first for loop")
   file_start_time = Sys.time()
-  split_geo_ids = c()
+  # formated string for the untar
+  tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
+  
+  # formated string for the untar output
+  tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+  
+  if (!file.exists(tar_file_output_f)){
+    untar_and_delete(geo_id)
+    print('Untar Successful')
+  }
+
+  split_geo_ids = list()
   if (length(platform_list[[geo_id]]) > 1){
     # if the list is a vector then it will split so it can run the for loop below
-    print("maybe its here")
+    # Read header information from a .CEL.gz file
+    file_list <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+    platform_tibble  <- tibble(
+      file_path = character(),
+      platform = character()
+    )
+    for (cel_file in file_list){
+      header_info <- read.celfile.header(cel_file)
+      current_platform <- header_info$cdfName
+      platform_tibble <- platform_tibble %>%
+        add_row(file_path = cel_file, platform = current_platform)
+    }
+    unique_platforms <- platform_tibble %>%
+      pull(platform) %>%
+      unique()
 
+    file_list1 <- platform_tibble %>%
+      filter(platform == unique_platforms[1]) %>%
+      pull(file_path)
 
+    file_list2 <- platform_tibble %>%
+      filter(platform == unique_platforms[2]) %>%
+      pull(file_path)
+    
+    split_geo_ids = list(file_list1, file_list2)
 
   }else{
-    print('It got to the else')
     # if its a string, it will just add the the vector for splitting.
-    split_geo_ids = c(geo_id)
+    file_list <- list.files(path = tar_file_output_f, pattern="*", full.names= TRUE, ignore.case = TRUE)
+    split_geo_ids <- list(file_list)
   }
-  for (split_id in split_geo_ids){
-    print('It got to the for loop')
-    
-    get_scan_upc_files(geo_id, platform_to_package_list)
-
+  for (file_list in split_geo_ids){
+    quality_control_removal(file_list)
+    # get_scan_upc_files(geo_id, platform_to_package_list)
     # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
     # save_normalized_file(geo_id, normalized)
   }
