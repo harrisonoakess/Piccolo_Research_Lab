@@ -118,3 +118,13 @@ arrayQualityMetrics
 - Take download and untar funciton outside of get_uc function to run before the second for loop
 - 
 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
+
+
+### 2/6/25 ###
+- Changeing the for loop so it can get through files that have multiple platforms within the files.
+
+### 2/10/25 ###
+- seperate by platform
+- fauceted plot have a subplot for each of the forms
+- histogram geom and density geom
+- 
