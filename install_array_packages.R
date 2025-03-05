@@ -89,7 +89,8 @@ mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
                    "GSE222355",
                    "GSE16676",
                    "GSE158376",
-                   "GSE39159"
+                   "GSE39159",
+                   "GSE19836"
 )
 
 untar_and_delete <- function(geo_id) {
@@ -157,8 +158,12 @@ for (geo_id in mouse_geo_ids){
     # List all the .CEL files in the directory
     cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
     
+    if (geo_id == "GSE19836"){
+      cel_files = tail(cel_files, 6)
+      }
+      pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
     
-    pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
+    
     useable_platform = platform_list[[geo_id]]
     
     platform_to_package_list[[useable_platform]] = pkgName

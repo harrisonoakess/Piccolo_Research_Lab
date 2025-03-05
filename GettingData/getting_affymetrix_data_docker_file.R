@@ -12,8 +12,22 @@ library(arrayQualityMetrics)
 #--------------------data--------------------
 
 #                 GSE47014-> primview platform error
+#                 GSE19836-> Loading required package: pd.mouse430a.2
+                # Attempting to obtain 'pd.mouse430a.2' from BioConductor website.
+                # Checking to see if your internet connection works...
+                # You do not have write access to '/usr/local/lib/R/site-library'.
+                # Error in read.celfiles(file_list) : 
+                #   The annotation package, pd.mouse430a.2, could not be loaded.
+                # Calls: quality_control_removal -> read.celfiles
 
-geofiles = c("GSE110064")
+# geofiles = c("GSE1294")
+# geofiles = c("GSE138861", "GSE1282")
+
+geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
+             "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
+             "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
+             "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
+             "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")            
 
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
@@ -55,7 +69,7 @@ platform_list <- list(
   "GSE1789" = "[HG-U133A] Affymetrix Human Genome U133A Array (GPL96)",
   "GSE19680" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE19681" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
-  "GSE19836" = c("[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)", "GPL8321	[Mouse430A_2] Affymetrix Mouse Genome 430A 2.0 Array"),
+  "GSE19836" = c("[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)", "[Mouse430A_2] Affymetrix Mouse Genome 430A 2.0 Array (GPL8321)"),
   "GSE20910" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE222355"=	"[Clariom_S_Mouse_HT]	Affymetrix Clariom S Assay HT, Mouse	(Includes Pico Assay)	(GPL24242)",	
   "GSE30517"=	"[HG-U133A]	Affymetrix Human Genome U133A	Array	(GPL96)",	
@@ -101,21 +115,29 @@ mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
 
 #------------------functions----------------------
 
-quality_control_removal <- function(file_list){
+quality_control_removal <- function(file_list, platform, geo_id){
+  print(paste0("Current platform: ", platform))
   threshold = 0.15
-  print("test1")
-  print(file_list)
   cel_files = read.celfiles(file_list)
-  print("test2")
-  print(cel_files)
   test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
-  print("test3")
   unlink("quality_output_file", recursive = TRUE)
   statistic_list = test_results$modules$maplot@outliers@statistic
   statistic_tibble = as_tibble(statistic_list)
-  print(file_list)
-  statistic_tibble = add_column(statistic_tibble, cel_file = file_list)
-  
+  file_vector <- unlist(file_list)
+  gsm_ids <- str_extract(file_vector, "GSM\\d+")
+  statistic_tibble <- add_column(statistic_tibble, cel_file = gsm_ids)
+  num_samples <- length(gsm_ids)
+  current_platforms <- rep(platform, num_samples)
+  current_platforms <- unlist(current_platforms)
+  # print(paste0("currentplatforms: ", current_platforms))
+  statistic_tibble <- add_column(statistic_tibble, platform = current_platforms)
+  # stop()
+
+  current_geo_id <- rep(geo_id, num_samples)
+  current_geo_id <- unlist(current_geo_id)
+  # print(paste0("currentplatforms: ", current_platforms))
+  statistic_tibble <- add_column(statistic_tibble, geo_id = current_geo_id)
+
   print(dir.exists("Data/"))
   write_tsv(statistic_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
 }
@@ -274,18 +296,24 @@ for (geo_id in geofiles){
       filter(platform == unique_platforms[2]) %>%
       pull(file_path)
     
-    split_geo_ids = list(file_list1, file_list2)
+    split_geo_ids = list(file_list1, file_list2, c(unique_platforms[1]), c(unique_platforms[2]))
 
   }else{
     # if its a string, it will just add the the vector for splitting.
     file_list <- list.files(path = tar_file_output_f, pattern="*", full.names= TRUE, ignore.case = TRUE)
-    split_geo_ids <- list(file_list)
+    split_geo_ids <- list(file_list, c(platform_list[[geo_id]]))
   }
-  for (file_list in split_geo_ids){
-    quality_control_removal(file_list)
+  num_platforms = length(split_geo_ids) / 2
+  i = 1
+  while (i <= num_platforms){
+    file_list <- split_geo_ids[i]
+    platform <- split_geo_ids[i + num_platforms][1]
+    quality_control_removal(file_list, platform, geo_id)
     # get_scan_upc_files(geo_id, platform_to_package_list)
     # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
     # save_normalized_file(geo_id, normalized)
+
+    i = i + 1
   }
   unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
