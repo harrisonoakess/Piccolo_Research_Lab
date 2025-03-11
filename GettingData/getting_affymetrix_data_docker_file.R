@@ -20,7 +20,7 @@ library(arrayQualityMetrics)
                 #   The annotation package, pd.mouse430a.2, could not be loaded.
                 # Calls: quality_control_removal -> read.celfiles
 
-# geofiles = c("GSE1294")
+# geofiles = c("GSE30517")
 # geofiles = c("GSE138861", "GSE1282")
 
 geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
@@ -127,8 +127,10 @@ quality_control_removal <- function(file_list, platform, geo_id){
   gsm_ids <- str_extract(file_vector, "GSM\\d+")
   statistic_tibble <- add_column(statistic_tibble, cel_file = gsm_ids)
   num_samples <- length(gsm_ids)
+
   current_platforms <- rep(platform, num_samples)
   current_platforms <- unlist(current_platforms)
+  current_platforms = gsub("\t", " ", current_platforms)
   # print(paste0("currentplatforms: ", current_platforms))
   statistic_tibble <- add_column(statistic_tibble, platform = current_platforms)
   # stop()
