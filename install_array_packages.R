@@ -1,4 +1,3 @@
-
 library(GEOquery)
 library(affy)
 library(tidyverse)
@@ -94,6 +93,7 @@ mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
 )
 
 untar_and_delete <- function(geo_id) {
+  print(paste(geo_id, '+2'))
   
   if (!file.exists(geo_id)){
     # Download supplementary files
@@ -104,15 +104,18 @@ untar_and_delete <- function(geo_id) {
   
   # formated string for the untar
   tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
+  print(tar_file_f)
   
   # formated string for the untar output
   tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+  print(tar_file_output_f)
   
-  if (length(list.files(geo_id)) == 0){
-    unlink(geo_id, recursive = TRUE)
-    unlink(tar_file_output_f, recursive = TRUE)
-    return()
-  }
+  # if (length(list.files(geo_id)) == 0) {
+  #   print(paste("No files found for", geo_id))
+  #   unlink(geo_id, recursive = TRUE)
+  #   unlink(tar_file_output_f, recursive = TRUE)
+  #   return()
+  # }
   
   # Extract the tar file
   untar(tar_file_f, exdir = tar_file_output_f)
@@ -126,6 +129,7 @@ untar_and_delete <- function(geo_id) {
   
   # Makes a list of all files that are not in the above cel_files vector
   files_to_delete <- setdiff(list.files(tar_file_output_f, full.names= TRUE), cel_files)
+
   
   # Deletes all files in the files_to_delete
   if (length(files_to_delete) > 0) {
@@ -135,20 +139,40 @@ untar_and_delete <- function(geo_id) {
 
 platform_to_package_list = list()
 for (geo_id in human_geo_ids){
-  
-    untar_and_delete(geo_id)
-    # formatted string for the untar output
-    tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
-    # List all the .CEL files in the directory
-    cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-    
-    
-    pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
-    useable_platform = platform_list[[geo_id]]
-    
-    platform_to_package_list[[useable_platform]] = pkgName
-    files = read.celfiles(cel_files)
+  print(paste(geo_id, '+1'))
+  print('before untar')
+  untar_and_delete(geo_id)
+  print('after untar')
 
+  # formatted string for the untar output
+  tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+  # List all the .CEL files in the directory
+  cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
+  print(cel_files)
+  print('test1')
+  
+  # if (length(cel_files) > 0){
+  #   pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
+  #     print('test2')
+  #     useable_platform = platform_list[[geo_id]]
+  #     print('test3')
+
+  #     platform_to_package_list[[useable_platform]] = pkgName
+  #     print('test4')
+  #     files = read.celfiles(cel_files)
+  #     print('test5')
+  # }
+  pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "hs", "entrezg")
+      print('test2')
+      useable_platform = platform_list[[geo_id]]
+      print('test3')
+
+      platform_to_package_list[[useable_platform]] = pkgName
+      print('test4')
+      files = read.celfiles(cel_files)
+      print('test5')
+
+  
 }
 
 for (geo_id in mouse_geo_ids){
@@ -161,14 +185,24 @@ for (geo_id in mouse_geo_ids){
     if (geo_id == "GSE19836"){
       cel_files = tail(cel_files, 6)
       }
-      pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
-    
-    
-    useable_platform = platform_list[[geo_id]]
-    
-    platform_to_package_list[[useable_platform]] = pkgName
+    # if (length(cel_files) > 0){ 
+    #   pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
+      
+      
+    #   useable_platform = platform_list[[geo_id]]
+      
+    #   platform_to_package_list[[useable_platform]] = pkgName
 
-    files = read.celfiles(cel_files)
+    #   files = read.celfiles(cel_files)
+    # }
+    pkgName = InstallBrainArrayPackage(cel_files[1], "25.0.0", "mm", "entrezg")
+      
+      
+      useable_platform = platform_list[[geo_id]]
+      
+      platform_to_package_list[[useable_platform]] = pkgName
+
+      files = read.celfiles(cel_files)
 }
 
 unlink("affymetrix_data", recursive = TRUE)

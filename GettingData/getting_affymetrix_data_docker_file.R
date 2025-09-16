@@ -1,40 +1,64 @@
 # setwd("/my_dir")
 total_start_time = Sys.time()
 options(timeout = max(300, getOption("timeout")))
+options(expressions = 500000)
+options(mc.cores = 1)
+library(doParallel)
+registerDoSEQ()
 #--------------------libraries--------------------
 library(GEOquery)
 library(affy)
 library(tidyverse)
 library(BiocManager)
-library(SCAN.UPC) 
+library(SCAN.UPC)
 library(lubridate)
 library(arrayQualityMetrics)
+ 
+# Fix parallel proccessing
+# options(mc.cores = 1)
+# library(doParallel)
+# registerDoSEQ()
 #--------------------data--------------------
-
+ 
 #                 GSE47014-> primview platform error
 #                 GSE19836-> Loading required package: pd.mouse430a.2
                 # Attempting to obtain 'pd.mouse430a.2' from BioConductor website.
                 # Checking to see if your internet connection works...
                 # You do not have write access to '/usr/local/lib/R/site-library'.
-                # Error in read.celfiles(file_list) : 
+                # Error in read.celfiles(file_list) :
                 #   The annotation package, pd.mouse430a.2, could not be loaded.
                 # Calls: quality_control_removal -> read.celfiles
-
-geofiles = c("GSE30517")
-# geofiles = c("GSE138861", "GSE1282")
-
-# geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
+ 
+# geofiles = c("GSE1282")  # 30.5 mb not working : The values were not separated into enough bins, so a tiny amount of noise will be added to make this possible.
+# geofiles = c("GSE1281") # 31.7mb working
+# geofiles = c("GSE16176") #54.2mb
+# geofiles = c("GSE143885") #2mb working
+# geofiles = c("GSE138861")  # 21.8mb this worked
+# geofiles = c("GSE110064")   # 26mb working
+# geofiles = c("GSE11877")
+# geofiles = c("GSE49635")
+# geofiles = c("GSE1294")  # GSM21063 --> Error in { : task 1 failed - "missing value where TRUE/FALSE needed" Calls: get_scan_upc_files ... SCANprivate -> processCelFiles -> %dopar% -> <Anonymous>
+ 
+geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
+             "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
+             "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
+             "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
+             "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")  
+ 
+# missing GSE1282 & GSE1294
+# geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
 #              "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
 #              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
-#              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")            
-
+#              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")  
+ 
+# Bad one
 # geofiles = c("GSE110064", "GSE11877", "GSE1281", "GSE1282", "GSE1294", "GSE138861", "GSE143885", "GSE149459", "GSE149460",
 #              "GSE149461", "GSE149462", "GSE149463", "GSE149464", "GSE149465", "GSE158376", "GSE158377", "GSE1611", "GSE16176", "GSE16676",
 #              "GSE16677", "GSE168111", "GSE17459", "GSE17760", "GSE1789","GSE47014", "GSE19680", "GSE19681", "GSE19836", "GSE20910", "GSE222355",
 #              "GSE30517", "GSE61804", "GSE35561", "GSE35665", "GSE36787", "GSE39159", "GSE48611", "GSE49050",
 #              "GSE49635", "GSE5390", "GSE59630", "GSE62538", "GSE6283", "GSE65055", "GSE70102", "GSE83449", "GSE84887", "GSE99135")
-
+ 
 #------------list of GEOs and Platforms----------
 platform_list <- list(
   "E-MEXP-3355" = "Affymetrix GeneChip Mouse Gene 1.0 ST Array [MoGene-1_0-st-v1]",
@@ -71,28 +95,28 @@ platform_list <- list(
   "GSE19681" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
   "GSE19836" = c("[Mouse430_2] Affymetrix Mouse Genome 430 2.0 Array (GPL1261)", "[Mouse430A_2] Affymetrix Mouse Genome 430A 2.0 Array (GPL8321)"),
   "GSE20910" = "[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array (GPL570)",
-  "GSE222355"=	"[Clariom_S_Mouse_HT]	Affymetrix Clariom S Assay HT, Mouse	(Includes Pico Assay)	(GPL24242)",	
-  "GSE30517"=	"[HG-U133A]	Affymetrix Human Genome U133A	Array	(GPL96)",	
-  "GSE61804"=	"[HG-U133_Plus_2 ]	Affymetrix Human Genome	U133 Plus	( GPL570)",	
-  "GSE35561"=	"[HuGene -1 _st ]	Affymetrix	Human	Gene	( GPL6244)",	
-  "GSE35665"=	"[HuEx -1 _st ]	Affymetrix	Human Exon	Array	( GPL5175)",	
-  "GSE36787"=	"[HuGene -1 _st ]	Affymetrix	Human	Gene	Array	( GPL6244)",	
-  "GSE39159"=	"[MoGene -1 _st ]	Affymetrix	Mouse	Gene	Array	( GPL6246)",	
-  "GSE47014"=	"[PrimeView ]	Affymetrix	Human	Gene Expression	Array	( GPL15207)",	
-  "GSE48611"=	"[HG -U133_Plus ]	Affymetrix	Human	Genome	U133 Plus	Array",	
-  "GSE49050"=	"[Mouse430 ]	Affymetrix	Mouse	Genome	Array",	
-  "GSE49635"=	"[MoGene -1 _st ]	AffyMetriX	MOUSE	Gene	Array",	
-  "GSE5390"=	"[Hg -U1133a ]	AFFYMETRIX	HUMAN	genome	array",	
-  "GSE59630"=	"[Huex -10_st ]	AFFYMETRIX	HUMAN	exon	array",	
-  "GSE62538"=	"[Mogène -10_st ]	AFFYMETRIX	MOUSE	gene	array",	
-  "GSE6283"=	"[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array",	
-  "GSE65055"=	"[Hugène -20_st ]	AFFYMETRIX	HUMAN	gene	array",	
-  "GSE70102"=	"[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array",	
-  "GSE83449"=	"[Hg -U1133a ]	AFFYMETRIX	HUMAN	genome	array",	
-  "GSE84887"=	c("[Hg -U1133_plus ]	AFFYMETRIX	HUMAN	genome	array", "[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)"),	
-  "GSE99135"=	"[Mogène -10_st ]	AFFYMETRIX	MOUSE	gene	array"
+  "GSE222355"=  "[Clariom_S_Mouse_HT] Affymetrix Clariom S Assay HT, Mouse  (Includes Pico Assay) (GPL24242)",  
+  "GSE30517"= "[HG-U133A] Affymetrix Human Genome U133A Array (GPL96)",
+  "GSE61804"= "[HG-U133_Plus_2 ]  Affymetrix Human Genome U133 Plus ( GPL570)",
+  "GSE35561"= "[HuGene -1 _st ] Affymetrix  Human Gene  ( GPL6244)",  
+  "GSE35665"= "[HuEx -1 _st ] Affymetrix  Human Exon  Array ( GPL5175)",  
+  "GSE36787"= "[HuGene -1 _st ] Affymetrix  Human Gene  Array ( GPL6244)",  
+  "GSE39159"= "[MoGene -1 _st ] Affymetrix  Mouse Gene  Array ( GPL6246)",  
+  "GSE47014"= "[PrimeView ] Affymetrix  Human Gene Expression Array ( GPL15207)",
+  "GSE48611"= "[HG -U133_Plus ] Affymetrix  Human Genome  U133 Plus Array",
+  "GSE49050"= "[Mouse430 ]  Affymetrix  Mouse Genome  Array",
+  "GSE49635"= "[MoGene -1 _st ] AffyMetriX  MOUSE Gene  Array",
+  "GSE5390"=  "[Hg -U1133a ]  AFFYMETRIX  HUMAN genome  array",
+  "GSE59630"= "[Huex -10_st ] AFFYMETRIX  HUMAN exon  array",
+  "GSE62538"= "[Mogène -10_st ] AFFYMETRIX  MOUSE gene  array",
+  "GSE6283"=  "[Hg -U1133_plus ]  AFFYMETRIX  HUMAN genome  array",
+  "GSE65055"= "[Hugène -20_st ] AFFYMETRIX  HUMAN gene  array",
+  "GSE70102"= "[Hg -U1133_plus ]  AFFYMETRIX  HUMAN genome  array",
+  "GSE83449"= "[Hg -U1133a ]  AFFYMETRIX  HUMAN genome  array",
+  "GSE84887"= c("[Hg -U1133_plus ]  AFFYMETRIX  HUMAN genome  array", "[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array [transcript (gene) version] (GPL6244)"),  
+  "GSE99135"= "[Mogène -10_st ] AFFYMETRIX  MOUSE gene  array"
 )
-
+ 
 #------------unique gse_platforms-----------------
 human_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE143885",
@@ -104,60 +128,115 @@ human_geo_ids <- c( # these are all the human GSE's (hs)
   "GSE168111",
   "GSE30517"
 )
-
-mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's (mm)
+mm
+mouse_geo_ids <- c("GSE1282", # These are all the Mouse GSE's ()
                    "GSE1281",
                    "GSE222355",
                    "GSE16676",
                    "GSE158376",
                    "GSE39159"
 )
-
+ 
 #------------------functions----------------------
-
+ 
 quality_control_removal <- function(file_list, platform, geo_id){
-  print(paste0("Current platform: ", platform))
-  threshold = 0.15
+  forPrint = as_tibble(paste0("Current platform: ", platform))
+  write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+  print(forPrint)
   cel_files = read.celfiles(file_list)
   test_results = arrayQualityMetrics(expressionset = cel_files, force = TRUE, outdir = "quality_output_file")
   unlink("quality_output_file", recursive = TRUE)
-  statistic_list = test_results$modules$maplot@outliers@statistic
-  statistic_tibble = as_tibble(statistic_list)
+ 
+# arrayQualityMetrics package when we switch back.
+  # print(paste(typeof(test_results), '1111'))
+  # print(test_results)
+  # print(paste(typeof(test_results$modules$heatmap@outliers), '2222'))
+  # print(test_results$modules)
+  outlierIndices <- c(test_results$modules$heatmap@outliers@which, test_results$modules$boxplot@outliers@which, test_results$modules$maplot@outliers@which)
+  # print(outlierIndices)
+ 
+  # Get the assay names corresponding to the indices above from the arrayTable data frame.
+  outlierNames <- test_results$arrayTable$sampleNames[outlierIndices]
+ 
+  # Now we have to count occurences of each assay name in the outlierNames
+  # vector. Any that are in three times and were thus classified as outliers
+  # by all three methods should be rejected.
+  # This part uses sapply() to go through the unique assay names found in the
+  # outlierNames vector, and use length() and which() to count how many times each
+  # one appears.
+  counts <- sapply(unique(outlierNames), function(x) {
+    # len is the number of times the assay name (x) appears in the outlierNames
+    # vector.
+    len <- length(which(outlierNames == x))
+    # return len
+    len
+  })
+ 
+  # The counts variable returned above by sapply is a named vector. The names
+  # are the assay names and the values are the number of times it appears in
+  # the outlierNames vector.
+  # If there are any, print them using cat() (so there aren't any [1] etc
+  # added by print()) separated by tabs.
+  files_to_keep = c()
+  if(length(which(counts == 3)) > 0) {
+    print("REJECTED ASSAYS:\t")
+    print(paste(names(which(counts == 3)), collapse="\t"))
+    files_to_keep = c(files_to_keep, file_list[])
+ 
+    # Append only the files that are NOT rejected
+    accepted_indices <- which(counts != 3)
+    files_to_keep <- c(files_to_keep, file_list[accepted_indices])
+  } else {
+    print("No assays rejected.")
+    files_to_keep = c(files_to_keep, file_list[])
+  }
+ 
   file_vector <- unlist(file_list)
   gsm_ids <- str_extract(file_vector, "GSM\\d+")
-  statistic_tibble <- add_column(statistic_tibble, cel_file = gsm_ids)
+  pass_reject_tibble = as_tibble(gsm_ids)
+  # pass_reject_tibble <- add_column(pass_reject_tibble, cel_file = gsm_ids)
   num_samples <- length(gsm_ids)
-
+ 
   current_platforms <- rep(platform, num_samples)
   current_platforms <- unlist(current_platforms)
   current_platforms = gsub("\t", " ", current_platforms)
-  # print(paste0("currentplatforms: ", current_platforms))
-  statistic_tibble <- add_column(statistic_tibble, platform = current_platforms)
-  # stop()
-
+  pass_reject_tibble <- add_column(pass_reject_tibble, platform = current_platforms)
+ 
   current_geo_id <- rep(geo_id, num_samples)
   current_geo_id <- unlist(current_geo_id)
-  # print(paste0("currentplatforms: ", current_platforms))
-  statistic_tibble <- add_column(statistic_tibble, geo_id = current_geo_id)
-
-  print(dir.exists("Data/"))
-  write_tsv(statistic_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
+  pass_reject_tibble <- add_column(pass_reject_tibble, geo_id = current_geo_id)
+ 
+  rejected_gsms <- names(which(counts == 3))
+  rejected_gsms <- str_extract(rejected_gsms, "GSM\\d+")
+  # print(paste(rejected_gsms, '3333'))
+  pass_status <- !(gsm_ids %in% rejected_gsms)
+  # print(gsm_ids)
+  # print(pass_status)
+  pass_reject_tibble <- add_column(pass_reject_tibble, "Pass?" = pass_status)
+ 
+  write_tsv(pass_reject_tibble, "Data/Affymetrix/quality_output_file.tsv", append = TRUE, col_names = FALSE)
+ 
+  return(files_to_keep)
 }
   
 untar_and_delete <- function(geo_id) {
   if (!(geo_id %in% names(platform_list))) {
     stop(paste(geo_id, "not found in platform_list"))
   }
-
+ 
   if (file.exists("affymetrix_data")){
     unlink("affymetrix_data", recursive = TRUE)
   }
-
+ 
   if (!file.exists(geo_id)){
     # Download supplementary files
-    print(paste("Downloading", geo_id))
+    forPrint = as_tibble(paste("Downloading", geo_id))
+    write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+    print(forPrint)
     getGEOSuppFiles(geo_id)
-    print("Download Successful")
+    forPrint = as_tibble("Download Successful")
+    write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+    print(forPrint)
   }
   
   # formated string for the untar
@@ -174,7 +253,9 @@ untar_and_delete <- function(geo_id) {
   
   # Extract the tar file
   untar(tar_file_f, exdir = tar_file_output_f)
-  print("Unzip Successfull")
+  forPrint = as_tibble("Unzip Successfull")
+  write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+  print(forPrint)
   
   # Deletes the file with the zipped files
   unlink(geo_id, recursive = TRUE)
@@ -190,13 +271,8 @@ untar_and_delete <- function(geo_id) {
     file.remove(files_to_delete)
   }
 }
-
-get_scan_upc_files <- function(geo_id, platform_to_package_list){
-  # formated string for the untar
-  tar_file_f = sprintf("%s/%s_RAW.tar", geo_id, geo_id)
-  
-  # formated string for the untar output
-  tar_file_output_f = sprintf("affymetrix_data/%s_RAW", geo_id)
+ 
+get_scan_upc_files <- function(cel_files_id, platform_to_package_list, platform){
   
   # Sets the file pattern to .CEL, so scan pulls everything with that ending
   celFilePattern <- file.path(tar_file_output_f, "*.CEL.gz")
@@ -204,20 +280,19 @@ get_scan_upc_files <- function(geo_id, platform_to_package_list){
   # formated string for the SCAN output
   scan_output_file_f = sprintf("affymetrix_data/%s_SCAN", geo_id)
   
-  # List all the .CEL files in the directory
-  cel_files <- list.files(path = tar_file_output_f, pattern="^[^.]*\\.CEL\\.gz$", full.names= TRUE, ignore.case = TRUE)
-  
   # This cleans up the data and removes outliers
-  platform = platform_list[[geo_id]]
+  platform = unlist(platform)
   pkgName = platform_to_package_list[[platform]]
-  print(pkgName)
   
   # last step to converting the information
-  # normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
-  
-  # return (normalized)
+  print('test2')
+  normalized = SCAN(celFilePattern, convThreshold = .9, probeLevelOutDirPath = NA, probeSummaryPackage=pkgName)
+  print('test3')
+  print(normalized)
+  print(typeof(normalized))
+  return (normalized)
 }
-
+ 
 format_time_diff <- function(time_diff) {
   hours <- floor(as.numeric(time_diff, units="hours"))
   minutes <- floor(as.numeric(time_diff, units="mins") %% 60)
@@ -226,38 +301,41 @@ format_time_diff <- function(time_diff) {
   
   sprintf("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
 }
-
-save_normalized_file <- function(geo_id, normalized){
+ 
+save_normalized_file <- function(geo_id, platform, normalized){
   normalized_tibble = as_tibble(normalized)
   normalized_tibble = normalized_tibble %>%
     rename_with(
-      ~str_extract(., "\\d+"),
+      ~make.unique(coalesce(str_extract(., "\\d+"), .), sep = "_"),
       everything()
     )
   
   test_dataframe = as.data.frame(normalized)
-  normalized_row_names = c(rownames(test_dataframe))
+  normalized_row_names = rownames(test_dataframe)
   new_names = str_extract(normalized_row_names, "GSM\\d+")
   
   final_tibble = normalized_tibble %>%
     add_column("Sample_ID" = new_names, .before = 1)
-  tibble_file_location = paste0("Data/Affymetrix/", geo_id, ".tsv.gz")
+  
+  tibble_file_location = paste0("Data/Affymetrix/", geo_id, platform, ".tsv.gz")
   write_tsv(final_tibble, tibble_file_location)
 }
-
+ 
 #-------------------Script-------------------------
 # platform_to_package_list = get_brain_array_packages(human_geo_ids, mouse_geo_ids, platform_list)
-
-
-platform_to_package_tibble_from_tsv = read_tsv("/package_info/platform_to_brain_array.tsv", 
+ 
+ 
+platform_to_package_tibble_from_tsv = read_tsv("/package_info/platform_to_brain_array.tsv",
                                                 col_types = cols(.default = col_character()), quote = "\"")
 platform_to_package_list = setNames(as.list(platform_to_package_tibble_from_tsv$value), platform_to_package_tibble_from_tsv$name)
-
-
+ 
+# if (!file.exists("Data/Affymetrix/Timing/timings.tsv")) {
+#   file.create("Data/Affymetrix/Timing/timings.tsv")
+# }
 if (!file.exists("Data/Affymetrix")){
   dir.create("Data/Affymetrix")
 }
-
+ 
 for (geo_id in geofiles){
   file_start_time = Sys.time()
   # formated string for the untar
@@ -268,9 +346,11 @@ for (geo_id in geofiles){
   
   if (!file.exists(tar_file_output_f)){
     untar_and_delete(geo_id)
-    print('Untar Successful')
+    forPrint = as_tibble('Untar Successful')
+    write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+    print(forPrint)
   }
-
+ 
   split_geo_ids = list()
   if (length(platform_list[[geo_id]]) > 1){
     # if the list is a vector then it will split so it can run the for loop below
@@ -289,17 +369,17 @@ for (geo_id in geofiles){
     unique_platforms <- platform_tibble %>%
       pull(platform) %>%
       unique()
-
+ 
     file_list1 <- platform_tibble %>%
       filter(platform == unique_platforms[1]) %>%
       pull(file_path)
-
+ 
     file_list2 <- platform_tibble %>%
       filter(platform == unique_platforms[2]) %>%
       pull(file_path)
     
     split_geo_ids = list(file_list1, file_list2, c(unique_platforms[1]), c(unique_platforms[2]))
-
+ 
   }else{
     # if its a string, it will just add the the vector for splitting.
     file_list <- list.files(path = tar_file_output_f, pattern="*", full.names= TRUE, ignore.case = TRUE)
@@ -310,18 +390,22 @@ for (geo_id in geofiles){
   while (i <= num_platforms){
     file_list <- split_geo_ids[i]
     platform <- split_geo_ids[i + num_platforms][1]
-    quality_control_removal(file_list, platform, geo_id)
-    # get_scan_upc_files(geo_id, platform_to_package_list)
-    # normalized = get_scan_upc_files(geo_id, platform_to_package_list)
-    # save_normalized_file(geo_id, normalized)
-
+    filtered_file_list = quality_control_removal(file_list, platform, geo_id)
+    print(filtered_file_list)
+    # normalized = get_scan_upc_files(file_list, platform_to_package_list, platform)
+    # save_normalized_file(geo_id, platform, normalized)
+ 
     i = i + 1
   }
   unlink("affymetrix_data", recursive = TRUE)
   file_end_time = Sys.time()
   total_file_time = file_end_time - file_start_time
-  print(paste('File download time: ', format_time_diff(total_file_time))) 
+  forPrint = as_tibble(paste('File download time: ', format_time_diff(total_file_time)))
+  write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+  print(forPrint)
 }
 total_end_time = Sys.time()
 total_time = total_end_time - total_start_time
-print(paste('Total time: ', format_time_diff(total_time)))
+forPrint = as_tibble(paste('Total time: ', format_time_diff(total_time)))
+write_tsv(forPrint, "Data/Affymetrix/Timing/timings.tsv", append = TRUE, col_names = FALSE)
+print(forPrint)

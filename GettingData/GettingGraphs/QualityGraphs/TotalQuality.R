@@ -65,33 +65,28 @@ plot_width <- ncol * 3
 plot_height <- nrow * 5
 # print(quality_data)
 # print(unique(quality_data$geo_id))
-# quality_data <- quality_data %>%
-#   mutate(facet_label = paste(geo_id, platform))
+quality_data <- quality_data %>%
+  mutate(facet_label = paste(geo_id, platform))
 
-percent_failed_table <- quality_data %>%
-  group_by(geo_id, passed) %>%
-  summarise(num_samples = n(), .groups = "drop") %>%
-  pivot_wider(names_from = passed, values_from = num_samples, values_fill = 0) %>%
-  mutate(percent_failed = (`FALSE` / (`TRUE` + `FALSE`)) * 100) %>%
-  select(geo_id, percent_failed)
+print(quality_data)
 
-quality_plot <- ggplot(percent_failed_table, aes(x = percent_failed)) +
-                  geom_histogram(binwidth = 0.45, fill = "#4285F4", color = "#4285F4",) +
-                  labs(title = "Distribution of Percent Failed Samples per Data Series",
-                  x = "Percent Failed",
+quality_plot <- ggplot(quality_data, aes(x = passed, fill = passed)) +
+                  geom_bar() +
+                  scale_fill_manual(values = c("TRUE" = "#0000FF", "FALSE" = "#FFA500"), 
+                   labels = c("TRUE" = "Non-Outlier", "FALSE" = "Outlier")) +
+                  labs(title = "Distribution of Quality Values (Outliers vs Non-Outliers)",
+                  x = "Status",
                   y = "Count",
                   fill = "Status") +
                   theme_minimal() +
-                  theme(aspect.ratio = 0.5, strip.background = element_rect(fill = "lightgray"),
-                        plot.title = element_text(size = 30, face = "bold"),   # Title font size
-                        axis.title.x = element_text(size = 20),                # X-axis label font size
-                        axis.title.y = element_text(size = 20),                # Y-axis label font size
-                        axis.text = element_text(size = 18)
-                        )             
+                  theme(strip.background = element_rect(fill = "lightgray"),
+                  strip.text = element_text(face = "bold", size = 10),
+                  )
+                #   facet_wrap(~ facet_label, ncol = ncol, scales = "free_y")
                                
 
 
-ggsave("Data/Graphs/QualityGraphs/quality_plot_GSE_updated.png", plot = quality_plot, width = 12, height = 8, dpi = 300)  # Adjust width and height as needed
+ggsave("Data/Graphs/QualityGraphs/quality_plot_GSE_total.png", plot = quality_plot, width = plot_width, height = plot_height)  # Adjust width and height as needed
 
 # print(paste("Number of values above the treshold per platform:", above_threshold))
 # print(paste("Unique platforms:", unique(quality_data$platform)))
